@@ -2,6 +2,7 @@
   "name": "vuepress-reco-blog",
   "version": "1.0.0",
   "author": "reco_luan",
+  "main": "index.js",
   "scripts": {
     "dev": "vuepress dev . --open --host \"localhost\"",
     "build": "vuepress build ."
