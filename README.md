@@ -1,7 +1,7 @@
 ---
 home: true
-heroText: ADHDの休憩所
-tagline: 眠気に負けるな！
+heroText: "常識とは十八歳までに身につけた偏見のコレクションのことをいう。"
+tagline: ""
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',

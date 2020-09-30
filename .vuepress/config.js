@@ -1,6 +1,6 @@
 module.exports = {
   title: "ADHDの休憩所",
-  description: "眠気に負けるな！",
+  description: "Information is not knowledge.",
   dest: "public",
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }],
