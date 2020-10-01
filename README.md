@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: "常識とは十八歳までに身につけた偏見のコレクションのことをいう。"
-tagline: ""
+tagline: "test"
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',
