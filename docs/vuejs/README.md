@@ -8,7 +8,7 @@ tags:
  - タグ1
  - タグ2
 keys:
- - '123456'
+ - 'password'
 publish: true
 sticky: 1
 isTimeLine: true
