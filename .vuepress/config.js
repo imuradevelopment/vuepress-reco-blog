@@ -16,12 +16,9 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "ホーム", link: "/", icon: "reco-home" },
-      { text: "カテゴリ", link: "/category/", icon: "reco-home" },
-      { text: "タグ", link: "/tag/", icon: "reco-home" },
-      { text: "テスト", link: "/test/", icon: "reco-home" },
       { text: "タイムライン", link: "/timeline/", icon: "reco-date" },
       {
-        text: "文書",
+        text: "記事",
         icon: "reco-message",
         items: [
           { text: "vuepress-reco", link: "/docs/vuepress-reco/" },
