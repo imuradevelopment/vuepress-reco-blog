@@ -88,11 +88,11 @@ module.exports = {
      * 密钥 (if your blog is private)
      */
 
-    keyPage: {
-      keys: ["5f4dcc3b5aa765d61d8327deb882cf99"],
-      color: "#42b983",
-      lineColor: "#42b983",
-    },
+    //    keyPage: {
+    //      keys: ["5f4dcc3b5aa765d61d8327deb882cf99"],
+    //      color: "#42b983",
+    //      lineColor: "#42b983",
+    //    },
 
     /**
      * valine 设置 (if you need valine comment )
