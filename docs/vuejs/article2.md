@@ -2,11 +2,9 @@
 title: first page in category1
 date: 2018-12-15
 tags:
- - tag1
+ -  [vue.js, git, github, javascript]
 categories:
- -  category1
-tests:
- - testTag
+ -  [デプロイ, 調べもの]
 ---
 
 first page in category1

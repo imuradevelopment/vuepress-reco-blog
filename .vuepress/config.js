@@ -21,8 +21,11 @@ module.exports = {
         text: "記事",
         icon: "reco-message",
         items: [
-          { text: "vuepress-reco", link: "/docs/vuepress-reco/" },
-          { text: "vuepress-reco", link: "/docs/testdir/" },
+          { text: "vue.js", link: "/docs/vuejs/" },
+          { text: "vuepress", link: "/docs/vuepress/" },
+          { text: "javascript", link: "/docs/javascript/" },
+          { text: "GitとGithub", link: "/docs/git&github/" },
+          { text: "Github", link: "/docs/github/" },
         ],
       },
       {
