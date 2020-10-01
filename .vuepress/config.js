@@ -16,11 +16,14 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "ホーム", link: "/", icon: "reco-home" },
+      { text: "カテゴリ", link: "/category/", icon: "reco-home" },
+      { text: "タグ", link: "/tag/", icon: "reco-home" },
+      { text: "テスト", link: "/test/", icon: "reco-home" },
       { text: "タイムライン", link: "/timeline/", icon: "reco-date" },
       {
         text: "文書",
         icon: "reco-message",
-        items: [{ text: "vuepress-reco", link: "/docs/theme-reco/" }],
+        items: [{ text: "vuepress-reco", link: "/docs/testdir/" }],
       },
       {
         text: "SNS",
@@ -38,16 +41,16 @@ module.exports = {
       "/docs/theme-reco/": ["", "theme", "plugin", "api"],
     },
     type: "blog",
-    // 博客设置
+    // ブログ設定
     blogConfig: {
       category: {
-        location: 2, // 在导航栏菜单中所占的位置，默认2
-        text: "カテゴリー", // 默认 “分类”
+        location: 2,
+        text: "カテゴリー",
       },
       tag: {
-        location: 3, // 在导航栏菜单中所占的位置，默认3
-        text: "タグ", // 默认 “标签”
-      },
+        location: 3,
+        text: "タグ",
+      }
     },
     friendLink: [
       {
@@ -64,21 +67,19 @@ module.exports = {
         link: "https://vuepress-theme-reco.recoluan.com",
       },
     ],
-    //logo: '/logo.png',
-    // 搜索设置
     search: true,
     searchMaxSuggestions: 10,
-    // 自动形成侧边导航
+    // サイドバー自動
     // sidebar: 'auto',
-    // 最后更新时间
+    // 最終更新
     lastUpdated: "Last Updated",
     // 作者
     author: "Imura",
-    // 作者头像
+    // 作者アバター
     authorAvatar: "/avatar.png",
     // 备案号
     record: "xxxx",
-    // 项目开始时间
+    // プロジェクト開始
     startYear: "2020",
     /**
      * 密钥 (if your blog is private)
