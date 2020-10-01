@@ -23,7 +23,10 @@ module.exports = {
       {
         text: "文書",
         icon: "reco-message",
-        items: [{ text: "vuepress-reco", link: "/docs/testdir/" }],
+        items: [
+          { text: "vuepress-reco", link: "/docs/vuepress-reco/" },
+          { text: "vuepress-reco", link: "/docs/testdir/" },
+        ],
       },
       {
         text: "SNS",
@@ -50,7 +53,7 @@ module.exports = {
       tag: {
         location: 3,
         text: "タグ",
-      }
+      },
     },
     friendLink: [
       {
@@ -72,7 +75,7 @@ module.exports = {
     // サイドバー自動
     // sidebar: 'auto',
     // 最終更新
-    lastUpdated: "Last Updated",
+    lastUpdated: "最終更新",
     // 作者
     author: "Imura",
     // 作者アバター
