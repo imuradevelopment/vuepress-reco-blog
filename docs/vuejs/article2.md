@@ -10,7 +10,7 @@ tags:
  - タグ2
 keys:
  - 'password'
-publish: false
+publish: true
 ---
 
 完全なFront Matterケース
