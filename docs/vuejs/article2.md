@@ -1,10 +1,16 @@
 ---
-title: first page in category1
-date: 2018-12-15
-tags:
- -  [vue.js, git, github, javascript]
+title: タイトル
+date: 2020-10-01
+sidebar: 'auto'
 categories:
- -  [デプロイ, 調べもの]
+ - カテゴリ1
+ - カテゴリ2
+tags:
+ - タグ1
+ - タグ2
+keys:
+ - 'password'
+publish: false
 ---
 
-first page in category1
+完全なFront Matterケース
