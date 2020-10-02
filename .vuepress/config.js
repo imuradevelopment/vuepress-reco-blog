@@ -40,9 +40,10 @@ module.exports = {
         ],
       },
     ],
-    sidebar: {
-      "/docs/theme-reco/": ["", "theme", "plugin", "api"],
-    },
+    //sidebar: {
+   //   "/docs/theme-reco/": ["", "theme", "plugin", "api"],
+    //},
+sidebar:"auto"
     type: "blog",
     // ブログ設定
     blogConfig: {
