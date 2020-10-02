@@ -40,10 +40,14 @@ module.exports = {
         ],
       },
     ],
+    nextLinks: true,
+    prevLinks: true,
+    smoothScroll: true,
+    searchMaxSuggestions: 10,
     //sidebar: {
-   //   "/docs/theme-reco/": ["", "theme", "plugin", "api"],
+    //   "/docs/theme-reco/": ["", "theme", "plugin", "api"],
     //},
-subSidebar: true,
+    subSidebar: true,
     type: "blog",
     // ブログ設定
     blogConfig: {
@@ -106,6 +110,7 @@ subSidebar: true,
   },
   markdown: {
     //lineNumbers: true,
+    toc: { includeLevel: [1, 2, 3] },
   },
   // *****************以下自分で設定
   locales: {
