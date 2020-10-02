@@ -24,8 +24,8 @@ module.exports = {
           { text: "vue.js", link: "/docs/vuejs/" },
           { text: "vuepress", link: "/docs/vuepress/" },
           { text: "javascript", link: "/docs/javascript/" },
-          { text: "GitとGithub", link: "/docs/git&github/" },
-          { text: "Github", link: "/docs/github/" },
+          { text: "GitとGithub", link: "/docs/infrastructure/git&github/" },
+          { text: "Github", link: "/docs/infrastructure/github/" },
         ],
       },
       {
