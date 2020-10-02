@@ -43,7 +43,7 @@ module.exports = {
     //sidebar: {
    //   "/docs/theme-reco/": ["", "theme", "plugin", "api"],
     //},
-subSidebar:"auto"
+subSidebar: true
     type: "blog",
     // ブログ設定
     blogConfig: {
