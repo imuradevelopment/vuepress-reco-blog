@@ -35,4 +35,8 @@
 *[W3C]:  World Wide Web Consortium  
 The HTML specification is maintained by the W3C.  
 
-文章内の一部を==このようにハイライト表示==させることができます。
+==このようにハイライト表示==
+
+文章内の一部を<mark>このようにハイライト表示</mark>させることができます。  
+
+@[youtube](https://www.youtube.com/watch?v=KsOCxwt-5FQ)

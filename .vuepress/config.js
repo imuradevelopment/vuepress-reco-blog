@@ -57,7 +57,16 @@ module.exports = {
       "markdown-it-abbr",
       // マーカー
       // ==マークしたい文章==
+      // インライン<mark>マークしたい文章</mark>
       "markdown-it-mark",
+      // CodePenとJSFiddleの埋め込み対応
+      // @[codepen](iframe src)
+      // @[jsfiddle](iframe src)
+      "markdown-it-playground",
+      // YouTubeとVimeoの埋め込み対応
+      // @[youtube](movie id)
+      // @[vimeo](movie id)
+      "markdown-it-video",
     ],
   },
   theme: "reco",

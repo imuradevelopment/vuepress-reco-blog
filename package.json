@@ -5,9 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev . --open --host \"localhost\"",
+    "devnch": "vuepress dev . --no-cache",
     "build": "vuepress build ."
   },
   "devDependencies": {
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-mark": "^3.0.0",
+    "markdown-it-playground": "0.0.5",
+    "markdown-it-video": "^0.6.3",
     "vuepress": "1.5.4",
     "vuepress-theme-reco": "1.5.7"
   },
