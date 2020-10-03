@@ -4,27 +4,15 @@
   "author": "reco_luan",
   "main": "index.js",
   "scripts": {
-    "devop": "vuepress dev . --open --host \"localhost\"",
-    "dev": "vuepress dev .",
-    "devch": "vuepress dev . --cache .cache",
-    "devnch": "vuepress dev . --no-cache",
+    "dev": "vuepress dev . --open --host \"localhost\"",
     "build": "vuepress build ."
   },
   "devDependencies": {
-    "esm": "^3.2.25",
-    "fsevents": "^1.2.13",
-    "markdown-it-abbr": "^1.0.4",
-    "markdown-it-mark": "^3.0.0",
     "vuepress": "1.5.4",
     "vuepress-theme-reco": "1.5.7"
   },
   "dependencies": {
     "vue-class-component": "^7.2.3"
   },
-  "description": "概要",
-  "resolutions": {
-    "watchpack": "^1.6.1"
-  },
-  "license": "UNLICENSED",
-  "private": true
+  "description": "概要"
 }
