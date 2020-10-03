@@ -11,6 +11,7 @@
     - [コードスニペットのimport](https://vuepress.vuejs.org/guide/markdown.html#import-code-snippets)
     - [コンテナ拡張](https://vuepress.github.io/en/plugins/container/#installation)
     - [アルゴリア検索](https://vuepress.vuejs.org/theme/default-theme-config.html#algolia-search)
+    - [markdown設定](https://www.nxworld.net/tips/vuepress-markdown-customize.html)
   - 調査
     - [リダイレクト？](https://vuepress.vuejs.org/guide/markdown.html#redirection-for-urls)
     - [フロントマター](https://vuepress.vuejs.org/guide/markdown.html#frontmatter)
@@ -27,6 +28,8 @@
   - [Gitで色々取り消したい](https://qiita.com/tani-shi/items/3419600447292abf6c79)
 - Netlify
   - [netlifyナレッジ共有](https://qiita.com/asahi13/items/4efc5615fa60384c5220)
+- Node
+  - [node](https://www.webprofessional.jp/beginners-guide-node-package-manager/)
 
 ## vuepress
 

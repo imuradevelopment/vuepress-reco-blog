@@ -30,3 +30,9 @@
 :::
 
 ## バッジ <Badge text="beta" type="warning"/>
+
+*[HTML]: Hyper Text Markup Language  
+*[W3C]:  World Wide Web Consortium  
+The HTML specification is maintained by the W3C.  
+
+文章内の一部を==このようにハイライト表示==させることができます。

@@ -1,7 +1,11 @@
 module.exports = {
+  // ベースURL
+  //base:"/imura/",
+  // タイトル
   title: "ADHDの休憩所",
+  // 説明
   description: "Information is not knowledge.",
-  dest: "public",
+  // HEAD
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }],
     [
@@ -12,6 +16,50 @@ module.exports = {
       },
     ],
   ],
+  // 開発用サーバー
+  host: "0.0.0.0",
+  // ポート
+  port: "8080",
+  // クライアントの一時ディレクトリ
+  temp: "/path/to/@vuepress/core/.temp",
+  // 出力ディレクトリ
+  //dest: ".vuepress/dist",
+  dest: "public",
+  // 多言語対応
+  locales: {
+    "/": {
+      lang: "ja",
+    },
+  },
+  // 意味不明
+  shouldPrefetch: () => true,
+  // キャッシュ(webpack高速化)
+  cache: true,
+  // 監視ファイル(vuepress再構築,リアルタイム更新)
+  extraWatchFiles: ["/README.md"],
+  // ファイルが見つからないとき探しに行くパターン
+  pattern: ["**/*.md", "**/*.vue"],
+  markdown: {
+    //lineNumbers: true,
+    toc: { includeLevel: [1, 2, 3] },
+    anchor: {
+      permalink: true,
+      permalinkSymbol: "#",
+    },
+    linkify: true,
+    externalLinks: { target: "_blank", rel: "noopener noreferrer" },
+    config: (md) => {
+      md.use(require("markdown-it-mark"));
+    },
+    plugins: [
+      // 語彙説明
+      // *[説明したい語彙]:ホバー表示文
+      "markdown-it-abbr",
+      // マーカー
+      // ==マークしたい文章==
+      "markdown-it-mark",
+    ],
+  },
   theme: "reco",
   themeConfig: {
     nav: [
@@ -44,9 +92,22 @@ module.exports = {
     prevLinks: true,
     smoothScroll: true,
     searchMaxSuggestions: 10,
-    //sidebar: {
-    //   "/docs/theme-reco/": ["", "theme", "plugin", "api"],
-    //},
+    // sidebar: [
+    //   {
+    //     title: "",
+    //     path: "/blogs/",
+    //     collapsable: false,
+    //     sidebarDepth: 3,
+    //     children: ["/vuepress", "/markdown拡張"],
+    //   },
+    //   {
+    //     title: "ブログ",
+    //     path: "/blog/",
+    //     collapsable: true,
+    //     sidebarDepth: 3,
+    //     children: ["/blog/article_2", "/blog/article_3"],
+    //   },
+    // ],
     subSidebar: true,
     type: "blog",
     // ブログ設定
@@ -107,16 +168,5 @@ module.exports = {
     //   appId: '...',// your appId
     //   appKey: '...', // your appKey
     // }
-  },
-  markdown: {
-    //lineNumbers: true,
-    toc: { includeLevel: [1, 2, 3] },
-  },
-  // *****************以下自分で設定
-  locales: {
-    "/": {
-      lang: "ja",
-      title: "ADHDの休憩所",
-    },
   },
 };
