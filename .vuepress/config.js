@@ -98,16 +98,17 @@ module.exports = {
       },
     ],
     displayAllHeaders: true,
-    sidebar: [{
-        title: ”記事一覧”,
-        path: /docs/vuejs,
-        collapsable: true,
-        sidebarDepth: 1,
-        children: [
-            ”/”,
-           ”/docs/vuejs”
-        ]
-     }
+    sidebar: [
+        {
+            title: ”test”,
+            path: /docs/vuejs/,
+            collapsable: true,
+            sidebarDepth: 1,
+            children: [
+                ”/”,
+               ”/docs/vuejs”
+            ]
+         },
      ],
     nextLinks: true,
     prevLinks: true,
