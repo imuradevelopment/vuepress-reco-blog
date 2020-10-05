@@ -21,7 +21,7 @@ module.exports = {
   // ポート
   port: "8080",
   // クライアントの一時ディレクトリ
-  temp: "/path/to/@vuepress/core/.temp",
+  //temp: "/path/to/@vuepress/core/.temp",
   // 出力ディレクトリ
   //dest: '.vuepress/dist',
   dest: "public",
