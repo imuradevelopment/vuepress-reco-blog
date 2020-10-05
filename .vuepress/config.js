@@ -97,6 +97,18 @@ module.exports = {
         ],
       },
     ],
+    displayAllHeaders: true,
+    sidebar: [{
+        title: ”記事一覧”,
+        path: /docs/,
+        collapsable: true,
+        sidebarDepth: 1,
+        children: [
+            ”/”,
+           ”/docs/vuejs”
+        ]
+     }
+     ],
     nextLinks: true,
     prevLinks: true,
     smoothScroll: true,

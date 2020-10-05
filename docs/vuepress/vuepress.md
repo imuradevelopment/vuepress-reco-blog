@@ -12,7 +12,8 @@
     - [コンテナ拡張](https://vuepress.github.io/en/plugins/container/#installation)
     - [アルゴリア検索](https://vuepress.vuejs.org/theme/default-theme-config.html#algolia-search)
     - [markdown設定](https://www.nxworld.net/tips/vuepress-markdown-customize.html)
-  - 調査
+    - [コードスニペット](https://vuepress.vuejs.org/guide/markdown.html#import-code-snippets)
+    - 調査
     - [リダイレクト？](https://vuepress.vuejs.org/guide/markdown.html#redirection-for-urls)
     - [フロントマター](https://vuepress.vuejs.org/guide/markdown.html#frontmatter)
     - [SEO対策](https://blog.ouvill.net/blog/2019-03-30--vuepress_blog/make_vuepress_blog/#seo-%E5%AF%BE%E7%AD%96%E3%82%92%E6%96%BD%E3%81%99)
