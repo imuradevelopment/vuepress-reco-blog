@@ -40,6 +40,7 @@ module.exports = {
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
   markdown: {
+    extractHeaders: ["h2", "h3", "h4"],
     //lineNumbers: true,
     toc: { includeLevel: [1, 2, 3] },
     anchor: {
@@ -99,17 +100,61 @@ module.exports = {
     ],
     displayAllHeaders: true,
     sidebar: [
-        {
-            title: ”test”,
-            path: /docs/vuejs/,
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                ”/”,
-               ”/docs/vuejs”
-            ]
-         },
-     ],
+      {
+        title: "infrastructure",
+        path: "/docs/infrastructure/",
+        collapsable: true,
+        sidebarDepth: 1,
+        children: [
+          "/docs/infrastructure/",
+          "/docs/infrastructure/git",
+          "/docs/infrastructure/git&github",
+          "/docs/infrastructure/github",
+        ],
+        initialOpenGroupIndex: -1,
+      },
+      {
+        title: "javascript",
+        path: "/docs/javascript/",
+        collapsable: true,
+        sidebarDepth: 1,
+        children: [
+          "/docs/javascript/",
+          "/docs/javascript/api",
+          "/docs/javascript/plugin",
+          "/docs/javascript/theme",
+        ],
+        initialOpenGroupIndex: -1,
+      },
+      {
+        title: "profile",
+        path: "/docs/profile/",
+        collapsable: true,
+        sidebarDepth: 1,
+        children: ["/docs/profile/"],
+        initialOpenGroupIndex: -1,
+      },
+      {
+        title: "vuejs",
+        path: "/docs/vuejs/",
+        collapsable: true,
+        sidebarDepth: 1,
+        children: ["/docs/vuejs/", "/docs/vuejs/sidebarSetting"],
+        initialOpenGroupIndex: -1,
+      },
+      {
+        title: "vuepress",
+        path: "/docs/vuepress/",
+        collapsable: true,
+        sidebarDepth: 1,
+        children: [
+          "/docs/vuepress/",
+          "/docs/vuepress/markdopwn拡張",
+          "/docs/vuepress/vuepress",
+        ],
+        initialOpenGroupIndex: -1,
+      },
+    ],
     nextLinks: true,
     prevLinks: true,
     smoothScroll: true,
