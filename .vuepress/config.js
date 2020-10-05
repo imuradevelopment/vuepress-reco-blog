@@ -171,7 +171,7 @@ module.exports = {
           //path: "/docs/profile/",
           collapsable: true,
           sidebarDepth: 1,
-          children: ["plofile/README.md"],
+          children: ["profile/"],
           //initialOpenGroupIndex: -1,
         },
         {
@@ -180,9 +180,9 @@ module.exports = {
           collapsable: true,
           sidebarDepth: 1,
           children: [
-            "infrastructure/git/README.md",
-            "infrastructure/git&github/README.md",
-            "infrastructure/github/README.md",
+            "infrastructure/git/",
+            "infrastructure/git&github/",
+            "infrastructure/github/",
           ],
           //initialOpenGroupIndex: -1,
         },
