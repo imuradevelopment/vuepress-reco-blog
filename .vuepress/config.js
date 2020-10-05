@@ -165,13 +165,13 @@ module.exports = {
     //   appKey: '...', // your appKey
     // }
     sidebar: {
-      '/docs/': [
+      "/docs/": [
         {
           title: "profile",
           //path: "/docs/profile/",
           collapsable: true,
           sidebarDepth: 1,
-          children: ['plofile/'],
+          children: ["/README"],
           //initialOpenGroupIndex: -1,
         },
         {
@@ -180,22 +180,42 @@ module.exports = {
           collapsable: true,
           sidebarDepth: 1,
           children: [
-            "infrastructure/git/",
-            "infrastructure/git&github/",
-            "infrastructure/github/",
+            "infrastructure/git/README",
+            "infrastructure/git&github/README",
+            "infrastructure/github/README",
           ],
           //initialOpenGroupIndex: -1,
         },
+        // {
+        //   title: "infrastructure",
+        //   //path: "/docs/infrastructure/",
+        //   collapsable: true,
+        //   sidebarDepth: 1,
+        //   children: [
+        //     "infrastructure/git/",
+        //     "infrastructure/git&github/",
+        //     "infrastructure/github/",
+        //   ],
+        //   //initialOpenGroupIndex: -1,
+        // },
+        // {
+        //   title: "infrastructure",
+        //   //path: "/docs/infrastructure/",
+        //   collapsable: true,
+        //   sidebarDepth: 1,
+        //   children: [
+        //     "infrastructure/git/",
+        //     "infrastructure/git&github/",
+        //     "infrastructure/github/",
+        //   ],
+        //   //initialOpenGroupIndex: -1,
+        // },
         {
           title: "javascript",
           //path: "/docs/javascript/",
           collapsable: true,
           sidebarDepth: 1,
-          children: [
-            "javascript/api",
-            "javascript/plugin",
-            "javascript/theme",
-          ],
+          children: ["javascript/api", "javascript/plugin", "javascript/theme"],
           initialOpenGroupIndex: -1,
         },
         {
