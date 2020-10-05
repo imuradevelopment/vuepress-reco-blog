@@ -171,7 +171,7 @@ module.exports = {
           //path: "/docs/profile/",
           collapsable: true,
           sidebarDepth: 1,
-          children: [],
+          children: ['plofile/'],
           //initialOpenGroupIndex: -1,
         },
         {
@@ -180,9 +180,9 @@ module.exports = {
           collapsable: true,
           sidebarDepth: 1,
           children: [
-            "infrastructure/git",
-            "infrastructure/git&github",
-            "infrastructure/github",
+            "infrastructure/git/",
+            "infrastructure/git&github/",
+            "infrastructure/github/",
           ],
           //initialOpenGroupIndex: -1,
         },
