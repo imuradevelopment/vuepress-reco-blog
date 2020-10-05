@@ -32,11 +32,11 @@ module.exports = {
     },
   },
   // 意味不明
-  shouldPrefetch: () => true,
+  //shouldPrefetch: () => true,
   // キャッシュ(webpack高速化)
-  cache: true,
+  //cache: true,
   // 監視ファイル(vuepress再構築,リアルタイム更新)
-  extraWatchFiles: ["/README.md"],
+  //extraWatchFiles: ["/README.md"],
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
   markdown: {
@@ -133,9 +133,9 @@ module.exports = {
       },
     ],
     search: true,
-    searchMaxSuggestions: 10,
+  //  searchMaxSuggestions: 10,
     // サイドバー自動
-    sidebar: "auto",
+  //  sidebar: "auto",
     // 最終更新
     lastUpdated: "最終更新",
     // 作者
