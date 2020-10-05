@@ -1,6 +1,6 @@
 module.exports = {
   // ベースURL
-  //base:"/imura/",
+  //base:'/imura/',
   // タイトル
   title: "ADHDの休憩所",
   // 説明
@@ -23,7 +23,7 @@ module.exports = {
   // クライアントの一時ディレクトリ
   temp: "/path/to/@vuepress/core/.temp",
   // 出力ディレクトリ
-  //dest: ".vuepress/dist",
+  //dest: '.vuepress/dist',
   dest: "public",
   // 多言語対応
   locales: {
@@ -40,7 +40,7 @@ module.exports = {
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
   markdown: {
-    extractHeaders: ["h2", "h3", "h4"],
+    //extractHeaders: ["h2", "h3", "h4"],
     //lineNumbers: true,
     toc: { includeLevel: [1, 2, 3] },
     anchor: {
@@ -72,6 +72,7 @@ module.exports = {
   },
   theme: "reco",
   themeConfig: {
+    type: "blog",
     nav: [
       { text: "ホーム", link: "/", icon: "reco-home" },
       { text: "タイムライン", link: "/timeline/", icon: "reco-date" },
@@ -98,84 +99,12 @@ module.exports = {
         ],
       },
     ],
-    displayAllHeaders: true,
-    sidebar: [
-      {
-        title: "infrastructure",
-        path: "/docs/infrastructure/",
-        collapsable: true,
-        sidebarDepth: 1,
-        children: [
-          "/docs/infrastructure/",
-          "/docs/infrastructure/git",
-          "/docs/infrastructure/git&github",
-          "/docs/infrastructure/github",
-        ],
-        initialOpenGroupIndex: -1,
-      },
-      {
-        title: "javascript",
-        path: "/docs/javascript/",
-        collapsable: true,
-        sidebarDepth: 1,
-        children: [
-          "/docs/javascript/",
-          "/docs/javascript/api",
-          "/docs/javascript/plugin",
-          "/docs/javascript/theme",
-        ],
-        initialOpenGroupIndex: -1,
-      },
-      {
-        title: "profile",
-        path: "/docs/profile/",
-        collapsable: true,
-        sidebarDepth: 1,
-        children: ["/docs/profile/"],
-        initialOpenGroupIndex: -1,
-      },
-      {
-        title: "vuejs",
-        path: "/docs/vuejs/",
-        collapsable: true,
-        sidebarDepth: 1,
-        children: ["/docs/vuejs/", "/docs/vuejs/sidebarSetting"],
-        initialOpenGroupIndex: -1,
-      },
-      {
-        title: "vuepress",
-        path: "/docs/vuepress/",
-        collapsable: true,
-        sidebarDepth: 1,
-        children: [
-          "/docs/vuepress/",
-          "/docs/vuepress/markdopwn拡張",
-          "/docs/vuepress/vuepress",
-        ],
-        initialOpenGroupIndex: -1,
-      },
-    ],
+    //displayAllHeaders: true,
     nextLinks: true,
     prevLinks: true,
     smoothScroll: true,
     searchMaxSuggestions: 10,
-    // sidebar: [
-    //   {
-    //     title: "",
-    //     path: "/blogs/",
-    //     collapsable: false,
-    //     sidebarDepth: 3,
-    //     children: ["/vuepress", "/markdown拡張"],
-    //   },
-    //   {
-    //     title: "ブログ",
-    //     path: "/blog/",
-    //     collapsable: true,
-    //     sidebarDepth: 3,
-    //     children: ["/blog/article_2", "/blog/article_3"],
-    //   },
-    // ],
-    subSidebar: true,
+    //subSidebar: true,
     type: "blog",
     // ブログ設定
     blogConfig: {
@@ -206,7 +135,7 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 10,
     // サイドバー自動
-    // sidebar: 'auto',
+    sidebar: "auto",
     // 最終更新
     lastUpdated: "最終更新",
     // 作者
@@ -222,9 +151,9 @@ module.exports = {
      */
 
     //    keyPage: {
-    //      keys: ["5f4dcc3b5aa765d61d8327deb882cf99"],
-    //      color: "#42b983",
-    //      lineColor: "#42b983",
+    //      keys: ['5f4dcc3b5aa765d61d8327deb882cf99'],
+    //      color: '#42b983',
+    //      lineColor: '#42b983',
     //    },
 
     /**
@@ -235,5 +164,57 @@ module.exports = {
     //   appId: '...',// your appId
     //   appKey: '...', // your appKey
     // }
+    sidebar: {
+      '/docs/': [
+        {
+          title: "profile",
+          //path: "/docs/profile/",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: [],
+          //initialOpenGroupIndex: -1,
+        },
+        {
+          title: "infrastructure",
+          //path: "/docs/infrastructure/",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: [
+            "infrastructure/git",
+            "infrastructure/git&github",
+            "infrastructure/github",
+          ],
+          //initialOpenGroupIndex: -1,
+        },
+        {
+          title: "javascript",
+          //path: "/docs/javascript/",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: [
+            "javascript/api",
+            "javascript/plugin",
+            "javascript/theme",
+          ],
+          initialOpenGroupIndex: -1,
+        },
+        {
+          title: "vuejs",
+          //path: "/docs/vuejs/",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: ["vuejs/sidebarSetting"],
+          //initialOpenGroupIndex: -1,
+        },
+        {
+          title: "vuepress",
+          //path: "/docs/vuepress/",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: ["vuepress/markdown", "vuepress/vuepress"],
+          initialOpenGroupIndex: -1,
+        },
+      ],
+    },
   },
 };

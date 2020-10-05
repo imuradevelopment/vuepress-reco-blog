@@ -1,4 +1,5 @@
 ---
+sidebar: false
 home: true
 heroText: "常識とは十八歳までに身につけた偏見のコレクションのことをいう。"
 tagline: "test"
@@ -11,6 +12,5 @@ tagline: "test"
 #   background: '#fff',
 #   borderRadius: '1rem',
 # }
-bgImageStyle: {
-  height: '450px'
-}
+bgImageStyle: { height: "450px" }
+---

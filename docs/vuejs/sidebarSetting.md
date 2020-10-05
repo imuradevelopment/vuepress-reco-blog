@@ -12,7 +12,7 @@ keys:
 publish: true
 sticky: 1
 isTimeLine: true
-sidebar: false
+sidebar: true
 isComment: false
 ---
 
