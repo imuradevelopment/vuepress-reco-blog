@@ -31,7 +31,7 @@ module.exports = {
       lang: "ja",
     },
   },
-  // 意味不明
+  // 不明の設定
   //shouldPrefetch: () => true,
   // キャッシュ(webpack高速化)
   //cache: true,
@@ -75,18 +75,19 @@ module.exports = {
     type: "blog",
     nav: [
       { text: "ホーム", link: "/", icon: "reco-home" },
-      { text: "タイムライン", link: "/timeline/", icon: "reco-date" },
       {
-        text: "記事",
+        text: "記事一覧",
         icon: "reco-message",
-        items: [
-          { text: "vue.js", link: "/docs/vuejs/" },
-          { text: "vuepress", link: "/docs/vuepress/" },
-          { text: "javascript", link: "/docs/javascript/" },
-          { text: "GitとGithub", link: "/docs/infrastructure/git&github/" },
-          { text: "Github", link: "/docs/infrastructure/github/" },
-        ],
+        link: "/docs/",
+        // items: [
+        //   { text: "vue.js", link: "/docs/vuejs/" },
+        //   { text: "vuepress", link: "/docs/vuepress/" },
+        //   { text: "javascript", link: "/docs/javascript/" },
+        //   { text: "GitとGithub", link: "/docs/infrastructure/git&github/" },
+        //   { text: "Github", link: "/docs/infrastructure/github/" },
+        // ],
       },
+      { text: "タイムライン", link: "/timeline/", icon: "reco-date" },
       {
         text: "SNS",
         icon: "reco-message",
@@ -133,9 +134,9 @@ module.exports = {
       },
     ],
     search: true,
-  //  searchMaxSuggestions: 10,
+    //  searchMaxSuggestions: 10,
     // サイドバー自動
-  //  sidebar: "auto",
+    //  sidebar: "auto",
     // 最終更新
     lastUpdated: "最終更新",
     // 作者
@@ -186,36 +187,17 @@ module.exports = {
           ],
           //initialOpenGroupIndex: -1,
         },
-        // {
-        //   title: "infrastructure",
-        //   //path: "/docs/infrastructure/",
-        //   collapsable: true,
-        //   sidebarDepth: 1,
-        //   children: [
-        //     "infrastructure/git/",
-        //     "infrastructure/git&github/",
-        //     "infrastructure/github/",
-        //   ],
-        //   //initialOpenGroupIndex: -1,
-        // },
-        // {
-        //   title: "infrastructure",
-        //   //path: "/docs/infrastructure/",
-        //   collapsable: true,
-        //   sidebarDepth: 1,
-        //   children: [
-        //     "infrastructure/git/",
-        //     "infrastructure/git&github/",
-        //     "infrastructure/github/",
-        //   ],
-        //   //initialOpenGroupIndex: -1,
-        // },
         {
           title: "javascript",
           //path: "/docs/javascript/",
           collapsable: true,
           sidebarDepth: 1,
-          children: ["javascript/api", "javascript/plugin", "javascript/theme"],
+          children: [
+            "javascript/",
+            "javascript/api",
+            "javascript/plugin",
+            "javascript/theme",
+          ],
           initialOpenGroupIndex: -1,
         },
         {
@@ -223,7 +205,7 @@ module.exports = {
           //path: "/docs/vuejs/",
           collapsable: true,
           sidebarDepth: 1,
-          children: ["vuejs/sidebarSetting"],
+          children: ["vuejs/", "vuejs/sidebarSetting"],
           //initialOpenGroupIndex: -1,
         },
         {
