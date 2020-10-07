@@ -16,4 +16,20 @@ sidebar: true
 isComment: false
 ---
 
-完全なFront Matterケース
+<p class="demo" :class="$style.example"></p>
+
+<style module>
+.example {
+  color: #41b883;
+}
+</style>
+
+<script>
+export default {
+  props: ['slot-key'],
+  mounted () {
+    document.querySelector(`.${this.$style.example}`)
+      .textContent = 'この文章のみスタイリングする書き方'
+  }
+}
+</script>

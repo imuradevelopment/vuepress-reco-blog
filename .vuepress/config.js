@@ -105,7 +105,7 @@ module.exports = {
     prevLinks: true,
     smoothScroll: true,
     searchMaxSuggestions: 10,
-    //subSidebar: true,
+    subSidebar: 'auto',
     type: "blog",
     // ブログ設定
     blogConfig: {
