@@ -17,6 +17,7 @@ sideber:'auto'
     - [アルゴリア検索](https://vuepress.vuejs.org/theme/default-theme-config.html#algolia-search)
     - [markdown設定](https://www.nxworld.net/tips/vuepress-markdown-customize.html)
     - [コードスニペット](https://vuepress.vuejs.org/guide/markdown.html#import-code-snippets)
+    - [reco設定](https://vuepress-theme-reco.recoluan.com/views/other/reco-optimization.html#%E6%8E%A8%E8%8D%90%E6%8F%92%E4%BB%B6%E7%B1%BB)
     - 調査
     - [リダイレクト？](https://vuepress.vuejs.org/guide/markdown.html#redirection-for-urls)
     - [フロントマター](https://vuepress.vuejs.org/guide/markdown.html#frontmatter)
