@@ -45,9 +45,9 @@ module.exports = {
       //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
       "ribbon",
       {
-        size: 90, // width of the ribbon, default: 90
-        opacity: 0.8, // opacity of the ribbon, default: 0.3
-        zIndex: -1, // z-index property of the background, default: -1
+        size: 90, // リボンの幅、デフォルト：90
+        opacity: 0.8, //リボンの不透明度、デフォルト：0.3
+        zIndex: -1, // 背景のz-indexプロパティ、デフォルト：-1
       },
     ],
     [

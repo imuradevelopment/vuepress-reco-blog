@@ -13,9 +13,10 @@
         </ModuleTransition>
 
         <ModuleTransition delay="0.04">
-          <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
+          <!-- <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
-          </h1>
+          </h1> -->
+          <h1 v-if="recoShowModule && $frontmatter.heroText !== null" v-for="subItem in $frontmatter.heroText">{{ subItem || $title || 'vuePress-theme-reco' }}</h1>
         </ModuleTransition>
 
         <ModuleTransition delay="0.08">
@@ -129,6 +130,10 @@ export default {
     this._setPage(this._getStoragePage())
   },
   methods: {
+    random (ary) {
+        const rnd = Math.floor(Math.random() * ary.length);
+        return ary[rnd];
+    },
     // 获取当前页码
     getCurrentPage (page) {
       this._setPage(page)

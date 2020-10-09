@@ -1,7 +1,9 @@
 ---
 sidebar: false
 home: true
-heroText: "常識とは十八歳までに身につけた偏見のコレクションのことをいう。"
+heroText: 
+ - "test2"
+ - "test1"
 tagline: "test"
 # heroImage: /hero.png
 # heroImageStyle: {

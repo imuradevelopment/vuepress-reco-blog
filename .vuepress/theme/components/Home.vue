@@ -9,7 +9,9 @@
           alt="hero">
       </ModuleTransition>
       <ModuleTransition delay="0.04">
-        <h1 v-if="recoShowModule && $frontmatter.heroText !== null">{{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}</h1>
+        <!-- <h1 v-if="recoShowModule && $frontmatter.heroText !== null">{{$frontmatter.heroText || $title || 'vuePress-theme-reco' }}</h1> -->
+        <h1 v-if="recoShowModule && $frontmatter.heroText !== null" v-for="subItem in $frontmatter.heroText">{{ ramdon($frontmatter.heroText) || $title || 'vuePress-theme-reco' }}</h1>
+
       </ModuleTransition>
       <ModuleTransition delay="0.08">
         <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
@@ -60,7 +62,13 @@ export default {
         margin: '6rem auto 1.5rem'
       }
     }
-  }
+  },
+  methods: {
+    random (ary) {
+        const rnd = Math.floor(Math.random() * ary.length);
+        return ary[rnd];
+    },
+  },
 }
 </script>
 
