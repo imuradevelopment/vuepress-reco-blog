@@ -170,22 +170,35 @@ module.exports = {
         {
           title: "profile",
           //path: "/docs/profile/",
-          collapsable: true,
+          collapsable: false,
           sidebarDepth: 1,
           children: ["profile/"],
           //initialOpenGroupIndex: -1,
         },
         {
           title: "infrastructure",
-          //path: "/docs/infrastructure/",
           collapsable: true,
           sidebarDepth: 1,
           children: [
-            "infrastructure/git/",
-            "infrastructure/git&github/",
-            "infrastructure/github/",
+            {
+              title:"git",
+              collapsable: true,
+              sidebarDepth: 1,
+              children: ["infrastructure/git/"],
+            },
+            {
+              title:"gitとgithub",
+              collapsable: true,
+              sidebarDepth: 1,
+              children: ["infrastructure/git&github/"],
+            },
+            {
+              title:"github",
+              collapsable: true,
+              sidebarDepth: 1,
+              children: ["infrastructure/github/"],
+            },
           ],
-          //initialOpenGroupIndex: -1,
         },
         {
           title: "javascript",

@@ -21,6 +21,13 @@
  ```
 :::
 
+::: theorem テスト
+テストの内容
+
+::: right
+[wikipedia](https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E8%BF%90%E5%8A%A8%E5%AE%9A%E5%BE%8B)
+:::
+
 ::: details Markdownテーブル
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
@@ -40,3 +47,5 @@ The HTML specification is maintained by the W3C.
 文章内の一部を<mark>このようにハイライト表示</mark>させることができます。  
 
 @[youtube](https://www.youtube.com/watch?v=KsOCxwt-5FQ)
+
+/\
