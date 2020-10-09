@@ -15,6 +15,7 @@ module.exports = {
         content: "width=device-width,initial-scale=1,user-scalable=no",
       },
     ],
+    ["link", { rel: "manifest", href: "/manifest.json" }],
   ],
   // 開発用サーバー
   host: "0.0.0.0",
@@ -39,6 +40,41 @@ module.exports = {
   //extraWatchFiles: ["/README.md"],
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
+  plugins: [
+    [
+      //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
+      "ribbon",
+      {
+        size: 90, // width of the ribbon, default: 90
+        opacity: 0.8, // opacity of the ribbon, default: 0.3
+        zIndex: -1, // z-index property of the background, default: -1
+      },
+    ],
+    [
+      "reading-progress",
+      {
+        readingDir: ["docs", "blogs"],
+      },
+    ],
+    [
+      "vuepress-plugin-code-copy",
+      {
+        //align: "top",
+        //color: String,
+        backgroundTransition: true,
+        //backgroundColor: String,
+        successText: "コピー完了!",
+        staticIcon: false,
+      },
+    ],
+    [
+      "@vuepress/pwa",
+      {
+        serviceWorker: true,
+        updatePopup: false,
+      },
+    ],
+  ],
   markdown: {
     //extractHeaders: ["h2", "h3", "h4"],
     //lineNumbers: true,
@@ -105,7 +141,7 @@ module.exports = {
     prevLinks: true,
     smoothScroll: true,
     searchMaxSuggestions: 10,
-    subSidebar: 'auto',
+    subSidebar: "auto",
     type: "blog",
     // ブログ設定
     blogConfig: {
@@ -119,19 +155,19 @@ module.exports = {
       },
     },
     friendLink: [
-      {
-        title: "午后南杂",
-        desc: "Enjoy when you can, and endure when you must.",
-        email: "1156743527@qq.com",
-        link: "https://www.recoluan.com",
-      },
-      {
-        title: "vuepress-theme-reco",
-        desc: "A simple and beautiful vuepress Blog & Doc theme.",
-        avatar:
-          "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
-        link: "https://vuepress-theme-reco.recoluan.com",
-      },
+      // {
+      //   title: "午后南杂",
+      //   desc: "Enjoy when you can, and endure when you must.",
+      //   email: "1156743527@qq.com",
+      //   link: "https://www.recoluan.com",
+      // },
+      // {
+      //   title: "vuepress-theme-reco",
+      //   desc: "A simple and beautiful vuepress Blog & Doc theme.",
+      //   avatar:
+      //     "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
+      //   link: "https://vuepress-theme-reco.recoluan.com",
+      // },
     ],
     search: true,
     //  searchMaxSuggestions: 10,
@@ -144,7 +180,7 @@ module.exports = {
     // 作者アバター
     authorAvatar: "/avatar.png",
     // 备案号
-    record: "xxxx",
+    //    record: "xxxx",
     // プロジェクト開始
     startYear: "2020",
     /**
@@ -181,19 +217,19 @@ module.exports = {
           sidebarDepth: 1,
           children: [
             {
-              title:"git",
+              title: "git",
               collapsable: true,
               sidebarDepth: 1,
               children: ["infrastructure/git/"],
             },
             {
-              title:"gitとgithub",
+              title: "gitとgithub",
               collapsable: true,
               sidebarDepth: 1,
               children: ["infrastructure/git&github/"],
             },
             {
-              title:"github",
+              title: "github",
               collapsable: true,
               sidebarDepth: 1,
               children: ["infrastructure/github/"],
