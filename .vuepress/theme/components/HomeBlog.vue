@@ -68,9 +68,103 @@
       <Content v-show="recoShowModule" class="home-center" custom/>
     </ModuleTransition>
   </div>
-  <div>
-    <script>
-      window.addEventListener('load', (event) => {
+</template>
+
+<script>
+import TagList from '@theme/components/TagList'
+import FriendLink from '@theme/components/FriendLink'
+import NoteAbstract from '@theme/components/NoteAbstract'
+import pagination from '@theme/mixins/pagination'
+import ModuleTransition from '@theme/components/ModuleTransition'
+import PersonalInfo from '@theme/components/PersonalInfo'
+import { getOneColor } from '@theme/helpers/other'
+import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
+
+export default {
+  mixins: [pagination, moduleTransitonMixin],
+  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo },
+  data () {
+    return {
+      recoShow: false,
+      currentPage: 1,
+      tags: []
+    }
+  },
+  computed: {
+    homeBlogCfg () {
+      return this.$recoLocales.homeBlog
+    },
+    actionLink () {
+      const {
+        actionLink: link,
+        actionText: text
+      } = this.$frontmatter
+
+      return {
+        link,
+        text
+      }
+    },
+    heroImageStyle () {
+      return this.$frontmatter.heroImageStyle || {}
+    },
+    bgImageStyle () {
+      const initBgImageStyle = {
+        textAlign: 'center',
+        overflow: 'hidden',
+        background: `
+          url(${this.$frontmatter.bgImage
+    ? this.$withBase(this.$frontmatter.bgImage)
+    : require('../images/bg.svg')}) center/cover no-repeat
+        `
+      }
+      const {
+        bgImageStyle
+      } = this.$frontmatter
+
+      return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle
+    },
+    heroHeight () {
+      return document.querySelector('.hero').clientHeight
+    }
+  },
+  mounted () {
+    this.recoShow = true
+    this._setPage(this._getStoragePage())
+    this.bgSvg()
+  },
+  methods: {
+    random (ary) {
+        const rnd = Math.floor(Math.random() * ary.length);
+        return ary[rnd];
+    },
+    // 获取当前页码
+    getCurrentPage (page) {
+      this._setPage(page)
+      setTimeout(() => {
+        window.scrollTo(0, this.heroHeight)
+      }, 100)
+    },
+    // 根据分类获取页面数据
+    getPages () {
+      let pages = this.$site.pages
+      pages = pages.filter(item => {
+        const { home, date } = item.frontmatter
+        return !(home == true || date === undefined)
+      })
+      // reverse()是为了按时间最近排序排序
+      this.pages = pages.length == 0 ? [] : pages
+    },
+    getPagesByTags (tagInfo) {
+      this.$router.push({ path: tagInfo.path })
+    },
+    _setPage (page) {
+      this.currentPage = page
+      this.$page.currentPage = page
+      this._setStoragePage(page)
+    },
+    getOneColor,
+    bgSvg () {
       (function () {
           const canvas = document.getElementById("lines");
           const ctx = canvas.getContext("2d");
@@ -248,104 +342,7 @@
           });
           resize();
         })();
-      });
-    </script>
-  </div>
-</template>
-
-<script>
-import TagList from '@theme/components/TagList'
-import FriendLink from '@theme/components/FriendLink'
-import NoteAbstract from '@theme/components/NoteAbstract'
-import pagination from '@theme/mixins/pagination'
-import ModuleTransition from '@theme/components/ModuleTransition'
-import PersonalInfo from '@theme/components/PersonalInfo'
-import { getOneColor } from '@theme/helpers/other'
-import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
-
-export default {
-  mixins: [pagination, moduleTransitonMixin],
-  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo },
-  data () {
-    return {
-      recoShow: false,
-      currentPage: 1,
-      tags: []
     }
-  },
-  computed: {
-    homeBlogCfg () {
-      return this.$recoLocales.homeBlog
-    },
-    actionLink () {
-      const {
-        actionLink: link,
-        actionText: text
-      } = this.$frontmatter
-
-      return {
-        link,
-        text
-      }
-    },
-    heroImageStyle () {
-      return this.$frontmatter.heroImageStyle || {}
-    },
-    bgImageStyle () {
-      const initBgImageStyle = {
-        textAlign: 'center',
-        overflow: 'hidden',
-        background: `
-          url(${this.$frontmatter.bgImage
-    ? this.$withBase(this.$frontmatter.bgImage)
-    : require('../images/bg.svg')}) center/cover no-repeat
-        `
-      }
-      const {
-        bgImageStyle
-      } = this.$frontmatter
-
-      return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle
-    },
-    heroHeight () {
-      return document.querySelector('.hero').clientHeight
-    }
-  },
-  mounted () {
-    this.recoShow = true
-    this._setPage(this._getStoragePage())
-  },
-  methods: {
-    random (ary) {
-        const rnd = Math.floor(Math.random() * ary.length);
-        return ary[rnd];
-    },
-    // 获取当前页码
-    getCurrentPage (page) {
-      this._setPage(page)
-      setTimeout(() => {
-        window.scrollTo(0, this.heroHeight)
-      }, 100)
-    },
-    // 根据分类获取页面数据
-    getPages () {
-      let pages = this.$site.pages
-      pages = pages.filter(item => {
-        const { home, date } = item.frontmatter
-        return !(home == true || date === undefined)
-      })
-      // reverse()是为了按时间最近排序排序
-      this.pages = pages.length == 0 ? [] : pages
-    },
-    getPagesByTags (tagInfo) {
-      this.$router.push({ path: tagInfo.path })
-    },
-    _setPage (page) {
-      this.currentPage = page
-      this.$page.currentPage = page
-      this._setStoragePage(page)
-    },
-    getOneColor
   }
 }
 </script>
