@@ -68,6 +68,9 @@
       <Content v-show="recoShowModule" class="home-center" custom/>
     </ModuleTransition>
   </div>
+  <!-- <div>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+  </div> -->
 </template>
 
 <script>
