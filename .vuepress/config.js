@@ -15,7 +15,7 @@ module.exports = {
         content: "width=device-width,initial-scale=1,user-scalable=no",
       },
     ],
-    ["link", { rel: "manifest", href: "/manifest.json" }],
+    // ["link", { rel: "manifest", href: "/manifest.json" }],
   ],
   // 開発用サーバー
   host: "0.0.0.0",
