@@ -3,7 +3,7 @@
     <!-- <div class="hero" :style="{ ...bgImageStyle }"> -->
     <div class="hero">
       <canvas id="lines"></canvas>
-      <h1>The Fus<span class="last">e</span></h1>
+      <h1>The Fus<span class="End">e</span></h1>
       <!-- <div>
         <ModuleTransition>
           <img

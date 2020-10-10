@@ -41,11 +41,13 @@ bgImageStyle: { height: "450px" }
     letter-spacing: 1.5em;
     font-size: clamp(1em, 5vw, 4em);
     animation: breath 10000ms ease-in-out infinite alternate;
+    text-align:center;
+    text-indent: -1rem; 
   }
- h1 > .last {
+ h1 > .End {
     letter-spacing: 0;
-    z-index:100;
   }
+
   
   @keyframes breath {
     0% {
