@@ -67,13 +67,13 @@ module.exports = {
         staticIcon: false,
       },
     ],
-    [
-      "@vuepress/pwa",
-      {
-        serviceWorker: false,
-        updatePopup: true,
-      },
-    ],
+    // [
+    //   "@vuepress/pwa",
+    //   {
+    //     serviceWorker: false,
+    //     updatePopup: true,
+    //   },
+    // ],
   ],
   markdown: {
     //extractHeaders: ["h2", "h3", "h4"],
@@ -109,7 +109,7 @@ module.exports = {
   theme: "reco",
   themeConfig: {
     type: "blog",
-    mode: 'dark', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
+    mode: "dark", // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
     modePicker: false, // 默认 true，false 不显示模式调节按钮，true 则显示
     nav: [
       { text: "ホーム", link: "/", icon: "reco-home" },
