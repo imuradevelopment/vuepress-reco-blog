@@ -41,15 +41,15 @@ module.exports = {
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
   plugins: [
-    [
-      //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
-      "ribbon",
-      {
-        size: 90, // リボンの幅、デフォルト：90
-        opacity: 0.8, //リボンの不透明度、デフォルト：0.3
-        zIndex: -1, // 背景のz-indexプロパティ、デフォルト：-1
-      },
-    ],
+    // [
+    //   //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
+    //   "ribbon",
+    //   {
+    //     size: 90, // リボンの幅、デフォルト：90
+    //     opacity: 0.8, //リボンの不透明度、デフォルト：0.3
+    //     zIndex: -1, // 背景のz-indexプロパティ、デフォルト：-1
+    //   },
+    // ],
     [
       "reading-progress",
       {
@@ -109,6 +109,8 @@ module.exports = {
   theme: "reco",
   themeConfig: {
     type: "blog",
+    mode: 'dark', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
+    modePicker: false, // 默认 true，false 不显示模式调节按钮，true 则显示
     nav: [
       { text: "ホーム", link: "/", icon: "reco-home" },
       {
@@ -142,7 +144,7 @@ module.exports = {
     smoothScroll: true,
     searchMaxSuggestions: 10,
     subSidebar: "auto",
-    type: "blog",
+    //type: "blog",
     // ブログ設定
     blogConfig: {
       category: {

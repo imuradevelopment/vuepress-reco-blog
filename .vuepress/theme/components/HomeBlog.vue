@@ -1,7 +1,10 @@
 <template>
   <div class="home-blog">
-    <div class="hero" :style="{ ...bgImageStyle }">
-      <div>
+    <!-- <div class="hero" :style="{ ...bgImageStyle }"> -->
+    <div class="hero">
+      <canvas id="lines"></canvas>
+      <h1>The Fus<span class="last">e</span></h1>
+      <!-- <div>
         <ModuleTransition>
           <img
             class="hero-img"
@@ -12,11 +15,11 @@
           />
         </ModuleTransition>
 
-        <ModuleTransition delay="0.04">
+        <ModuleTransition delay="0.04"> -->
           <!-- <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
           </h1> -->
-          <h1 v-if="recoShowModule && $frontmatter.heroText !== null" v-for="subItem in $frontmatter.heroText">{{ subItem || $title || 'vuePress-theme-reco' }}</h1>
+          <!-- <h1 v-if="recoShowModule && $frontmatter.heroText !== null" v-for="subItem in $frontmatter.heroText">{{ subItem || $title || 'vuePress-theme-reco' }}</h1>
         </ModuleTransition>
 
         <ModuleTransition delay="0.08">
@@ -24,7 +27,7 @@
             {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }}
           </p>
         </ModuleTransition>
-      </div>
+      </div> -->
     </div>
 
     <ModuleTransition delay="0.16">
