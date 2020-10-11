@@ -135,7 +135,7 @@ export default {
   mounted () {
     this.recoShow = true
     this._setPage(this._getStoragePage())
-    this.bgSvg()
+    // this.bgSvg()
   },
   methods: {
     random (ary) {

@@ -1,6 +1,12 @@
 module.exports = {
   // ベースURL
   //base:'/imura/',
+  // 多言語対応
+  locales: {
+    "/": {
+      lang: 'ja',
+    },
+  },
   // タイトル
   title: "VanillaNote",
   // 説明
@@ -16,7 +22,9 @@ module.exports = {
       },
     ],
     ["link", { rel: "manifest", href: "/manifest.json" }],
+    ["script", { src: "/bg.js" }],
   ],
+
   // 開発用サーバー
   host: "0.0.0.0",
   // ポート
@@ -26,12 +34,6 @@ module.exports = {
   // 出力ディレクトリ
   //dest: '.vuepress/dist',
   dest: "public",
-  // 多言語対応
-  locales: {
-    "/": {
-      lang: "ja",
-    },
-  },
   // 不明の設定
   //shouldPrefetch: () => true,
   // キャッシュ(webpack高速化)
