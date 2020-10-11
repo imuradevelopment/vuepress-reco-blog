@@ -22,7 +22,7 @@ module.exports = {
       },
     ],
     ["link", { rel: "manifest", href: "/manifest.json" }],
-    ["script", { src: "/bg.js" }],
+    // ["script", { src: "/bg.js" }],
   ],
 
   // 開発用サーバー
