@@ -2,11 +2,14 @@
   <div class="home-blog">
     <!-- <div class="hero" :style="{ ...bgImageStyle }"> -->
     <div class="hero">
+      <ModuleTransition delay="0.8">
       <canvas id="lines"></canvas>
+      </ModuleTransition>
       <h1>
         vanill<span class="End">a</span><br>
         Not<span class="End">e</span>
       </h1>
+      
       <!-- <h1>vanilla Not<span class="End">e</span></h1> -->
       <!-- <div>
         <ModuleTransition>
