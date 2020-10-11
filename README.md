@@ -67,13 +67,17 @@ bgImageStyle: { height: "450px" }
     background-color: hsla(240deg, 20%, 20%, 1);
   } */
 
-  .hero h1 {
-    text-transform: uppercase; 
-    letter-spacing: 0.5em; 
-    font-size: clamp(1em, 5vw, 4em); 
-    animation: breath 10000ms ease-in-out infinite alternate; 
-    text-align:center; text-indent: -1rem; 
-    } 
+body {
+  overscroll-behavior-y: none;
+}
+
+.hero h1 {
+  text-transform: uppercase; 
+  letter-spacing: 0.5em; 
+  font-size: clamp(1em, 5vw, 4em); 
+  animation: breath 10000ms ease-in-out infinite alternate; 
+  text-align:center; text-indent: -1rem; 
+  } 
 
 h1 > .End { 
   letter-spacing: 0;
