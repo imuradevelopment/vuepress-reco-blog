@@ -3,7 +3,11 @@
     <!-- <div class="hero" :style="{ ...bgImageStyle }"> -->
     <div class="hero">
       <canvas id="lines"></canvas>
-      <h1>The Fus<span class="End">e</span></h1>
+      <h1>
+        vanill<span class="End">a</span><br>
+        Not<span class="End">e</span>
+      </h1>
+      <!-- <h1>vanilla Not<span class="End">e</span></h1> -->
       <!-- <div>
         <ModuleTransition>
           <img
@@ -279,27 +283,39 @@ export default {
             }
           }
           function clear() {
-            ctx.fillStyle = `hsla(200deg, 20%, 10%, 0.3)`;
+            // ctx.fillStyle = `hsla(200deg, 20%, 10%, 0.3)`;
+            ctx.fillStyle = `hsla(0deg, 0%, 9.41%, 0.3)`;
             ctx.fillRect(0, 0, width, height);
           }
           function generateLines(amount) {
             let lines = [];
             let styles = [
-              {
-                size: 1.25,
-                style: "pattern",
-                color: { h: 210, s: 100, l: 70, a: 0.5 }
-              },
-              { size: 2.5, style: "pattern", color: { h: 190, s: 90, l: 50, a: 0.3 } },
-              { size: 5, style: "pattern", color: { h: 210, s: 70, l: 60, a: 0.2 } },
-              { size: 10, style: "pattern", color: { h: 310, s: 80, l: 55, a: 0.15 } },
-              { size: 20, style: "pattern", color: { h: 200, s: 25, l: 35, a: 0.12 } },
-              { size: 20, style: "pattern", color: { h: 210, s: 20, l: 40, a: 0.12 } },
-              { size: 40, style: "pattern", color: { h: 190, s: 40, l: 50, a: 0.12 } },
-              { size: 80, style: "pattern", color: { h: 220, s: 50, l: 60, a: 0.12 } },
-              { size: 40, style: "glitches", color: { h: 300, s: 100, l: 50, a: 0.3 } },
-              { size: 20, style: "glitches", color: { h: 210, s: 100, l: 50, a: 0.3 } },
-              { size: 60, style: "glitches", color: { h: 30, s: 100, l: 50, a: 0.3 } }
+              // { size: 1.25, style: "pattern", color: { h: 210, s: 100, l: 70, a: 0.5 } },
+              // { size: 2.5, style: "pattern", color: { h: 190, s: 90, l: 50, a: 0.3 } },
+              // { size: 5, style: "pattern", color: { h: 210, s: 70, l: 60, a: 0.2 } },
+              // { size: 10, style: "pattern", color: { h: 310, s: 80, l: 55, a: 0.15 } },
+              // { size: 20, style: "pattern", color: { h: 200, s: 25, l: 35, a: 0.12 } },
+              // { size: 20, style: "pattern", color: { h: 210, s: 20, l: 40, a: 0.12 } },
+              // { size: 40, style: "pattern", color: { h: 190, s: 40, l: 50, a: 0.12 } },
+              // { size: 80, style: "pattern", color: { h: 220, s: 50, l: 60, a: 0.12 } },
+              // { size: 40, style: "glitches", color: { h: 300, s: 100, l: 50, a: 0.3 } },
+              // { size: 20, style: "glitches", color: { h: 210, s: 100, l: 50, a: 0.3 } },
+              // { size: 60, style: "glitches", color: { h: 30, s: 100, l: 50, a: 0.3 } }
+              
+              { size: 1.25, style: "pattern", color: { h: 120, s: 100, l: 70, a: 0.5 } },
+              { size: 2.5, style: "pattern", color: { h: 150, s: 100, l: 50, a: 0.3 } },
+              { size: 5, style: "pattern", color: { h: 90, s: 100, l: 50, a: 0.5 } },
+              { size: 10, style: "pattern", color: { h: 160, s: 100, l: 50, a: 1 } },
+              { size: 20, style: "pattern", color: { h: 90, s: 100, l: 50, a: 0.5 } },
+              // { size: 20, style: "pattern", color: { h: 210, s: 70, l: 60, a: 0.2 } },
+              // { size: 40, style: "pattern", color: { h: 310, s: 80, l: 55, a: 0.15 } },
+              // { size: 80, style: "pattern", color: { h: 200, s: 25, l: 35, a: 0.12 } },
+              // { size: 20, style: "pattern", color: { h: 210, s: 20, l: 40, a: 0.12 } },
+              // { size: 40, style: "pattern", color: { h: 190, s: 40, l: 50, a: 0.12 } },
+              // { size: 80, style: "pattern", color: { h: 220, s: 50, l: 60, a: 0.12 } },
+              // { size: 40, style: "glitches", color: { h: 300, s: 100, l: 50, a: 0.3 } },
+              // { size: 20, style: "glitches", color: { h: 210, s: 100, l: 50, a: 0.3 } },
+              // { size: 30, style: "glitches", color: { h: 30, s: 100, l: 50, a: 0.3 } }
             ];
             for (let i = 0; i < amount; i += 1) {
               let style = styles[(Math.random() ** 2 * styles.length) | 0];
@@ -320,8 +336,15 @@ export default {
             id = cancelAnimationFrame(id);
             width = window.innerWidth;
             height = window.innerHeight;
+            if (width <= 719){
+              canvas.height = 450;
+            } else if (width <= 419){
+              canvas.height = 450;
+            }else{
+              canvas.height = height;
+            }
             canvas.width = width;
-            canvas.height = height;
+            //canvas.height = height;
             const lines = generateLines(40);
             function update() {
               if (!(id % 3)) {

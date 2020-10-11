@@ -2,7 +2,7 @@ module.exports = {
   // ベースURL
   //base:'/imura/',
   // タイトル
-  title: "ADHDの休憩所",
+  title: "VanillaNote",
   // 説明
   description: "Information is not knowledge.",
   // HEAD

@@ -36,13 +36,13 @@ bgImageStyle: { height: "450px" }
     align-items: center;
   } */
   
- .hero h1 {
+ /* .hero h1 {
     text-transform: uppercase;
-    letter-spacing: 1.5em;
-    font-size: clamp(1em, 5vw, 4em);
+    letter-spacing: 1rem;
     animation: breath 10000ms ease-in-out infinite alternate;
     text-align:center;
-    text-indent: -1rem; 
+    width: min(90%, 100vw); 
+    word-wrap: break-word;
   }
  h1 > .End {
     letter-spacing: 0;
@@ -65,10 +65,36 @@ bgImageStyle: { height: "450px" }
     margin: 0;
     padding: 0;
     background-color: hsla(240deg, 20%, 20%, 1);
+  } */
 
+  .hero h1 {
+    text-transform: uppercase; 
+    letter-spacing: 0.5em; 
+    font-size: clamp(1em, 5vw, 4em); 
+    animation: breath 10000ms ease-in-out infinite alternate; 
+    text-align:center; text-indent: -1rem; 
+    } 
+
+h1 > .End { 
+  letter-spacing: 0;
   }
-  
+
+@keyframes breath { 
+  0% { transform: scale(1); } 
+  100% { transform: scale(1.1); } 
+  } 
+
+canvas { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  margin: 0; 
+  padding: 0; 
+  /* background-color: hsla(240deg, 20%, 20%, 1); */
+  background-color: hsla(0deg, 0%, 9.41%, 1);
+  }
 </style>
+
 <!-- <script>
 window.addEventListener('load', (event) => {
 (function () {
