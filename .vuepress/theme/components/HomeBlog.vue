@@ -3,7 +3,7 @@
     <!-- <div class="hero" :style="{ ...bgImageStyle }"> -->
     <div class="hero">
       <ModuleTransition delay="0.8">
-      <canvas id="lines"></canvas>
+      <canvas id="lines" v-once></canvas>
       </ModuleTransition>
       <h1>
         vanill<span class="End">a</span><br>
