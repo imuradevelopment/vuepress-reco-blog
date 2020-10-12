@@ -72,7 +72,7 @@ module.exports = {
     [
       "@vuepress/pwa",
       {
-        serviceWorker: true,
+        serviceWorker: false,
         updatePopup: true,
       },
     ],
