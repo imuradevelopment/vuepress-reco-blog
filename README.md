@@ -67,10 +67,6 @@ bgImageStyle: { height: "450px" }
     background-color: hsla(240deg, 20%, 20%, 1);
   } */
 
-body {
-  overscroll-behavior-y: none;
-}
-
 .hero h1 {
   text-transform: uppercase; 
   letter-spacing: 0.5em; 
