@@ -250,15 +250,85 @@ ESXに対応していないブラウザにも対応できる(ES5は主流ブラ�
 
 1. never型を使って、起こりえない値の型を使用する方法
 
-```typescript
-//never
-function error(message: string): never {
-  throw new Error(message);
-}
-console.log("This is an Error.");
-```
+    ```typescript
+    //never
+    function error(message: string): never {
+    throw new Error(message);
+    }
+    console.log("This is an Error.");
+    ```
 
 ### コンパイラを使う方法
+
+1. watchモードで保存時に自動でコンパイル
+
+    ```sh
+    tsc index.ts (-w or --watch)
+    ```
+
+1. tsconfig.json
+
+    tsconfig.jsonの作成(watchモードと併用可能)  
+
+    ```sh
+    tsc --init
+    ```
+
+    ```json
+    {
+        "complerOptions": {
+            "target": "es6(デフォルトではes3なので状況に応じて設定)",
+            "lib": [
+                "ES6",
+                "DOM",
+                "DOM.Iterable",
+                "ScriptHost",
+            ],
+            "AllowJs": true,
+            "CheckJs": true,
+            "declaration": true,
+            "declarationMap": true,
+            "sourceMap": true,
+            "outDir": "./dist",
+            "rootDir": "./src",
+            "removeComments": true,
+            "noEmit": true,
+            "noEmitOnError": true,
+            "downlevelIteration": true,
+            "noUnuserdLocals": true,
+            "noUnuserdParameters": true,
+            },
+        "include": [
+            "index.ts",
+            "ワイルドカードでtscファイルを指定"
+        ],
+        "exculude": [
+            "node_modules(何か設定する場合は再定義が必要)",
+            "**/.spec.ts",
+            "ワイルドカードで省くファイルを指定"
+        ],
+        "files": [
+            "ワイルドカードが使用できない"
+            "include < exculude < files"
+        ]
+    }
+    ```
+
+1. targetを指定して、特定バージョンのJsファイルにコンパイル
+
+1. libを指定して、Typescriptが用意している型の定義を追加する
+
+1. allowJs, checkJs, jsx, declarationMapの設定はこう使う
+
+1. SourceMapを使用して、ブラウザでTypeScriptを操作する方法(デバックしやすくする)
+
+1. outDirとrootDir, removeComments, noEmit, downlevellteration1の使い方
+
+1. noEmitOnErrorオプションを使って、エラーが出たときにコンパイルしない方法
+
+1. nolmplicAnyやstrictNullChecksなどのstrictの設定はこう使う
+
+1. 綺麗なコードを書くための設定をする方法
 
 ### typescriptでのClassの使い方
 
