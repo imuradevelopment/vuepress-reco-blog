@@ -21,7 +21,7 @@ module.exports = {
         content: "width=device-width,initial-scale=1,user-scalable=no",
       },
     ],
-    ["link", { rel: "manifest", href: "/manifest.json" }],
+    //["link", { rel: "manifest", href: "/manifest.json" }],
     // ["script", { src: "/bg.js" }],
   ],
 
