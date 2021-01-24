@@ -1,3 +1,17 @@
+---
+title: TypeScript
+date: 2020-10-01
+categories:
+ - TypeScript
+tags:
+ - TypeScript
+publish: true
+sticky: 1
+isTimeLine: true
+sidebar: true
+isComment: false
+---
+
 # typescript
 
 javascriptにコンパイルされる、静的型システムがついた上位集合
