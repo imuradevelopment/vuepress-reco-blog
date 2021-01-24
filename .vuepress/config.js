@@ -230,7 +230,7 @@ module.exports = {
               title: "typescript",
               collapsable: true,
               sidebarDepth: 1,
-              children: ["infrastructure/typescript/"],
+              children: ["typescript/"],
             },
             {
               title: "github",
