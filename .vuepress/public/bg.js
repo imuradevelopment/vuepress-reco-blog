@@ -1,6 +1,5 @@
 window.addEventListener("load", (event) => {
   (function() {
-    console.log(JSON.stringify(event));
     const canvas = document.getElementById("lines");
     const ctx = canvas.getContext("2d");
     let width;
