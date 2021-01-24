@@ -227,12 +227,6 @@ module.exports = {
               children: ["infrastructure/git/"],
             },
             {
-              title: "typescript",
-              collapsable: true,
-              sidebarDepth: 1,
-              children: ["typescript/"],
-            },
-            {
               title: "github",
               collapsable: true,
               sidebarDepth: 1,
@@ -246,12 +240,14 @@ module.exports = {
           collapsable: true,
           sidebarDepth: 1,
           children: [
-            "javascript/",
-            "javascript/api",
-            "javascript/plugin",
-            "javascript/theme",
-          ],
+            "javascript/"],
           initialOpenGroupIndex: -1,
+        },
+        {
+          title: "typescript",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: ["typescript/"],
         },
         {
           title: "vuejs",
