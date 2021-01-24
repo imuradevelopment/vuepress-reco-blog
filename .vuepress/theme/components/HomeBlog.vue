@@ -9,7 +9,7 @@
         vanill<span class="End">a</span><br>
         Not<span class="End">e</span>
       </h1>
-      
+
       <!-- <h1>vanilla Not<span class="End">e</span></h1> -->
       <!-- <div>
         <ModuleTransition>
@@ -304,7 +304,7 @@ export default {
             // { size: 40, style: "glitches", color: { h: 300, s: 100, l: 50, a: 0.3 } },
             // { size: 20, style: "glitches", color: { h: 210, s: 100, l: 50, a: 0.3 } },
             // { size: 60, style: "glitches", color: { h: 30, s: 100, l: 50, a: 0.3 } }
-            
+
             { size: 1.25, style: "pattern", color: { h: 120, s: 100, l: 70, a: 0.5 } },
             { size: 2.5, style: "pattern", color: { h: 150, s: 100, l: 50, a: 0.3 } },
             { size: 5, style: "pattern", color: { h: 90, s: 100, l: 50, a: 0.5 } },
@@ -363,9 +363,9 @@ export default {
             }
             id = requestAnimationFrame(update);
         }
-        window.addEventListener("resize", resize, {
-            passive: true
-        });
+//        window.addEventListener("resize", resize, {
+//            passive: true
+//        });
         resize();
         })();
     },
