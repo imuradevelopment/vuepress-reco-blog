@@ -227,10 +227,10 @@ module.exports = {
               children: ["infrastructure/git/"],
             },
             {
-              title: "gitとgithub",
+              title: "typescript",
               collapsable: true,
               sidebarDepth: 1,
-              children: ["infrastructure/git&github/"],
+              children: ["infrastructure/typescript/"],
             },
             {
               title: "github",
