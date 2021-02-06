@@ -226,71 +226,40 @@ module.exports = {
     },
   },
   "getSideBar" : (folder, title) => {
-                    const extension = [".md"];
-                    const files = fs
-                      .readdirSync(path.join(`${__dirname}/../${folder}`))
-                      .filter(
-                        (item) =>
-                          item.toLowerCase() != "readme.md" &&
-                          fs.statSync(path.join(`${__dirname}/../${folder}`, item)).isFile() &&
-                          extension.includes(path.extname(item))
-                      );
-                    console.log(folder);
-                    console.log("選択フォルダ:" + folder);
-                    console.log(
-                      "選択フォルダ:" +
-                        JSON.stringify([{ title: title, children: ["", ...files] }])
-                    );
-                }
+      const extension = [".md"];
+      let searchPath = path.join(`${__dirname}/../${folder}/`);
+      let folderNames = fs
+        .readdirSync(searchPath)
+        .filter((item) => fs.statSync(path.join(searchPath, item)).isDirectory());
+      let folderLength = folderNames.length;
+      if(folderLength == 0){
+        const files = fs
+          .readdirSync(searchPath)
+          .filter(
+            (item) =>
+              item.toLowerCase() != "readme.md" &&
+              fs.statSync(path.join(searchPath, item)).isFile() &&
+              extension.includes(path.extname(item))
+          );
+        console.log("選択フォルダ:" + folder);
+        console.log(
+          "選択フォルダ:" +
+            JSON.stringify([{ title: title, children: ["", ...files] }])
+        );
+        //return [{ title: title, children: ["", ...files] }];
+      }else{
+        let searchPaths = [];
+        searchPaths.push(searchPath);
+        folderNames.forEach((folderName) =>
+          searchPaths.push(path.join(searchPath, folderName))
+        );
+        searchPaths.foreach((searchPath) =>
+          console.log(searchPath)
+        );
+        console.log(searchPaths);
+      }
+    }
 };
-  // [
-  //   {
-  //     title: "infrastructure",
-  //     collapsable: true,
-  //     sidebarDepth: 1,
-  //     children: [
-  //       {
-  //         title: "git",
-  //         collapsable: true,
-  //         sidebarDepth: 1,
-  //         children: ["infrastructure/git/", "infrastructure/git/git"],
-  //       },
-  //       {
-  //         title: "github",
-  //         collapsable: true,
-  //         sidebarDepth: 1,
-  //         children: [
-  //           "infrastructure/github/",
-  //           "infrastructure/github/github",
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // // ],
-  // addFunc: {
-  //   getSideBar: (folder, title) => {
-  //     const extension = [".md"];
-  //     const files = fs
-  //       .readdirSync(path.join(`${__dirname}/../${folder}`))
-  //       .filter(
-  //         (item) =>
-  //           item.toLowerCase() != "readme.md" &&
-  //           fs
-  //             .statSync(path.join(`${__dirname}/../${folder}`, item))
-  //             .isFile() &&
-  //           extension.includes(path.extname(item))
-  //       );
-  //     console.log(folder);
-  //     console.log("選択フォルダ:" + folder);
-  //     console.log(
-  //       "選択フォルダ:" +
-  //         JSON.stringify([{ title: title, children: ["", ...files] }])
-  //     );
-  //     return [{ title: title, children: ["", ...files] }];
-  //   },
-  // },
-//};
-
 
 function getSideBar (folder, title) {
   const extension = [".md"];
