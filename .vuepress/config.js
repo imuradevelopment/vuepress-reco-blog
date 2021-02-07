@@ -204,6 +204,8 @@ module.exports = {
           collapsable: true,
           sidebarDepth: 1,
           children: [
+            "/docs/infrastructure/",
+            "/docs/infrastructure/template.md",
             {
               title: "git",
               collapsable: true,
@@ -225,40 +227,15 @@ module.exports = {
       "/test/": getSideBar("docs/infrastructure", "testTitle"),
     },
   },
-  "getSideBar" : (folder, title) => {
-      const extension = [".md"];
-      let searchPath = path.join(`${__dirname}/../${folder}/`);
-      let folderNames = fs
-        .readdirSync(searchPath)
-        .filter((item) => fs.statSync(path.join(searchPath, item)).isDirectory());
-      let folderLength = folderNames.length;
-      if(folderLength == 0){
-        const files = fs
-          .readdirSync(searchPath)
-          .filter(
-            (item) =>
-              item.toLowerCase() != "readme.md" &&
-              fs.statSync(path.join(searchPath, item)).isFile() &&
-              extension.includes(path.extname(item))
-          );
-        console.log("選択フォルダ:" + folder);
-        console.log(
-          "選択フォルダ:" +
-            JSON.stringify([{ title: title, children: ["", ...files] }])
-        );
-        //return [{ title: title, children: ["", ...files] }];
-      }else{
-        let searchPaths = [];
-        searchPaths.push(searchPath);
-        folderNames.forEach((folderName) =>
-          searchPaths.push(path.join(searchPath, folderName))
-        );
-        searchPaths.foreach((searchPath) =>
-          console.log(searchPath)
-        );
-        console.log(searchPaths);
-      }
-    }
+  getSideBar: (folder, title) => {
+    const extension = [".md"];
+    let searchPath = path.join(`${__dirname}/../${folder}/`);
+    console.log(searchPath);
+    let folderNames = fs.readdirSync(searchPath).filter((item) => fs.statSync(path.join(searchPath, item)).isDirectory());
+    let folderLength = folderNames.length;
+    const files = fs.readdirSync(searchPath).filter((item) =>item.toLowerCase() != "readme.md" && fs.statSync(path.join(searchPath, item)).isFile() &&extension.includes(path.extname(item)));
+
+  },
 };
 
 function getSideBar (folder, title) {
