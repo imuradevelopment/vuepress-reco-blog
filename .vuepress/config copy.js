@@ -1,32 +1,5 @@
-//.vuepress/config.js
 const fs = require("fs");
 const path = require("path");
-
-var dirpath = "./docs";
-var dirs = fs.readdirSync(dirpath).filter((f) => {
-  return (
-    fs.existsSync(dirpath + "/" + f) &&
-    fs.statSync(dirpath + "/" + f).isDirectory()
-  );
-});
-var sidebarArray = ["/"].concat(
-  dirs.map((dir) => {
-    return {
-      title: dir,
-      collapsable: true,
-      sidebarDepth: 1,
-      children: fs.readdirSync(dirpath + "/" + dir).map((childDir) => {
-        //return dirpath + "/" + dir + "/" + childDir;
-        if (childDir.toLowerCase() == "readme.md") {
-          return dir + "/";
-        }
-        return dir + "/" + childDir;
-      }),
-    };
-  })
-);
-
-console.log(sidebarArray);
 
 module.exports = {
   // ベースURL
@@ -34,7 +7,7 @@ module.exports = {
   // 多言語対応
   locales: {
     "/": {
-      lang: "ja",
+      lang: "ja-JP",
     },
   },
   // タイトル
@@ -52,36 +25,26 @@ module.exports = {
       },
     ],
     //["link", { rel: "manifest", href: "/manifest.json" }],
-    // ["script", { src: "/bg.js" }],
   ],
 
   // 開発用サーバー
   host: "0.0.0.0",
-  // ポート
   port: "8080",
-  // クライアントの一時ディレクトリ
-  //temp: "/path/to/@vuepress/core/.temp",
   // 出力ディレクトリ
-  //dest: '.vuepress/dist',
   dest: "public",
-  // 不明の設定
-  //shouldPrefetch: () => true,
-  // キャッシュ(webpack高速化)
-  //cache: true,
-  // 監視ファイル(vuepress再構築,リアルタイム更新)
   //extraWatchFiles: ["/README.md"],
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
   plugins: [
-    // [
-    //   //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
-    //   "ribbon",
-    //   {
-    //     size: 90, // リボンの幅、デフォルト：90
-    //     opacity: 0.8, //リボンの不透明度、デフォルト：0.3
-    //     zIndex: -1, // 背景のz-indexプロパティ、デフォルト：-1
-    //   },
-    // ],
+    [
+      //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
+      "ribbon",
+      {
+        size: 90, // リボンの幅、デフォルト：90
+        opacity: 0.8, //リボンの不透明度、デフォルト：0.3
+        zIndex: -1, // 背景のz-indexプロパティ、デフォルト：-1
+      },
+    ],
     [
       "reading-progress",
       {
@@ -170,13 +133,11 @@ module.exports = {
         ],
       },
     ],
-    //displayAllHeaders: true,
     nextLinks: true,
     prevLinks: true,
     smoothScroll: true,
     searchMaxSuggestions: 10,
     subSidebar: "auto",
-    //type: "blog",
     // ブログ設定
     blogConfig: {
       category: {
@@ -204,9 +165,9 @@ module.exports = {
       // },
     ],
     search: true,
-    //  searchMaxSuggestions: 10,
     // サイドバー自動
-    //  sidebar: "auto",
+    //sidebar: "auto",
+    displayAllHeaders: true,
     // 最終更新
     lastUpdated: "最終更新",
     // 作者
@@ -235,8 +196,63 @@ module.exports = {
     //   appId: '...',// your appId
     //   appKey: '...', // your appKey
     // }
+
     sidebar: {
-      "/docs/": sidebarArray,
+      "/docs/": [
+        {
+          title: "infrastructure",
+          collapsable: true,
+          sidebarDepth: 1,
+          children: [
+            "/docs/infrastructure/",
+            "/docs/infrastructure/template.md",
+            {
+              title: "git",
+              collapsable: true,
+              sidebarDepth: 1,
+              children: ["infrastructure/git/", "infrastructure/git/git"],
+            },
+            {
+              title: "github",
+              collapsable: true,
+              sidebarDepth: 1,
+              children: [
+                "infrastructure/github/",
+                "infrastructure/github/github",
+              ],
+            },
+          ],
+        },
+      ],
+      "/test/": getSideBar("docs/infrastructure", "testTitle"),
     },
   },
+  getSideBar: (folder, title) => {
+    const extension = [".md"];
+    let searchPath = path.join(`${__dirname}/../${folder}/`);
+    console.log(searchPath);
+    let folderNames = fs.readdirSync(searchPath).filter((item) => fs.statSync(path.join(searchPath, item)).isDirectory());
+    let folderLength = folderNames.length;
+    const files = fs.readdirSync(searchPath).filter((item) =>item.toLowerCase() != "readme.md" && fs.statSync(path.join(searchPath, item)).isFile() &&extension.includes(path.extname(item)));
+
+  },
 };
+
+function getSideBar (folder, title) {
+  const extension = [".md"];
+  const files = fs
+    .readdirSync(path.join(`${__dirname}/../${folder}`))
+    .filter(
+      (item) =>
+        item.toLowerCase() != "readme.md" &&
+        fs.statSync(path.join(`${__dirname}/../${folder}`, item)).isFile() &&
+        extension.includes(path.extname(item))
+    );
+  console.log(folder);
+  console.log("選択フォルダ:" + folder);
+  console.log(
+    "選択フォルダ:" +
+      JSON.stringify([{ title: title, children: ["", ...files] }])
+  );
+  //return [{ title: title, children: ["", ...files] }];
+}

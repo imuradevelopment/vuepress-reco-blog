@@ -39,7 +39,7 @@ module.exports = {
       });
     });
   }),
-  jsons: new Array(),
+  //jsons: new Array(),
   useGetFiles2: function(folder, extension) {
     arr = new Array();
     this.getFiles2(
@@ -88,25 +88,47 @@ module.exports = {
   usegetFiles3: function(searchPath, extension) {
     this.getFiles3(searchPath, extension)
       .then((fileFullDirPaths) => {
-        fileFullDirPaths.forEach((fileFullDirPath) =>{
+        fileFullDirPaths.forEach((fileFullDirPath) => {
           return this.getFiles3(fileFullDirPath, extension);
         });
       })
       .catch(console.error("ディレクトリ読み込みエラー"));
   },
-  getFiles4: function() {
-    let testFolder = "/docs/"
-    let testPath = path.join(`${__dirname}/../${testFolder}/`);
-    fs.readdir(testPath,
-      function(err, files){
-        if(err){
-          console.error(err, "readdirエラー");
+  getFiles4: function walkSync(dir, suffix) {
+    let json = {};
+    let results = [];
+    json[dir] = results;
+    let list = fs.readdirSync(dir);
+    list.forEach(function(file) {
+      file = path.resolve(dir, file);
+      let stat = fs.statSync(file);
+      if (stat && stat.isDirectory()) {
+        /* Recurse into a subdirectory */
+        json[dir].push(walkSync(file, suffix));
+        //results = results.concat(walkSync(file, suffix));
+      } else {
+        // NOTE: append files with specified suffix:
+        if (!suffix || suffix.length <= 0 || _hasSuffix(file, suffix)) {
+          json[dir].push(file);
+          //results.push(file);
         }
-          filesAfter = []
-          files.forEach(file => {filesAfter.push(path.join(__dirname, file))});
-          console.log(...filesAfter);
-          return files;
       }
-    )
-  }
+    });
+    return json;
+    //return results;
+
+    function _hasSuffix(filename, list) {
+      if (typeof list === "string") {
+        return filename.endsWith(list);
+      } else if (Array.isArray(list)) {
+        for (let len = list.length, i = 0; i < len; i++) {
+          const suffix = list[i];
+          if (filename.endsWith(suffix)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+  },
 };
