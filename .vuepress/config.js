@@ -26,7 +26,29 @@ var sidebarArray = ["/"].concat(
   })
 );
 
-console.log(sidebarArray);
+var dirs2 = fs.readdirSync(dirpath).filter((f) => {
+  let tmpDir=fs.existsSync(dirpath + "/" + f) &&
+    fs.statSync(dirpath + "/" + f).isDirectory()
+  return tmpDir;
+});
+var sidebarArray2 = ["/"].concat(
+  dirs2.map((dir2) => {
+    return {
+      title: dir2,
+      collapsable: true,
+      sidebarDepth: 1,
+      children: fs.readdirSync(dirpath + "/" + dir2).map((childDir) => {
+        if (childDir.toLowerCase() == "readme.md") {
+          return dir2 + "/";
+        }else if(fs.statSync(childDir).isDirectory()){
+          
+        }
+        return dir2 + "/" + childDir;
+      }),
+    };
+  })
+);
+console.log(sidebarArray2);
 
 module.exports = {
   // ベースURL
