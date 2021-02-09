@@ -2,53 +2,85 @@
 const fs = require("fs");
 const path = require("path");
 
-var dirpath = "./docs";
-var dirs = fs.readdirSync(dirpath).filter((f) => {
-  return (
-    fs.existsSync(dirpath + "/" + f) &&
-    fs.statSync(dirpath + "/" + f).isDirectory()
-  );
-});
-var sidebarArray = ["/"].concat(
-  dirs.map((dir) => {
-    return {
-      title: dir,
-      collapsable: true,
-      sidebarDepth: 1,
-      children: fs.readdirSync(dirpath + "/" + dir).map((childDir) => {
-        //return dirpath + "/" + dir + "/" + childDir;
-        if (childDir.toLowerCase() == "readme.md") {
-          return dir + "/";
-        }
-        return dir + "/" + childDir;
-      }),
-    };
-  })
-);
+function getSidebar(parentDir, ...extens) {
+  var startNodeDir = parentDir;
+  var getInDirsArray = function(parentDir) {
+    let inDirs = fs.readdirSync(parentDir).filter((f) => {
+      if (
+        fs.existsSync(parentDir + "/" + f) &&
+        fs.statSync(parentDir + "/" + f).isDirectory()
+      ) {
+        return f;
+      }
+    });
+    return inDirs;
+  };
+  var getInFilesArray = function(parentDir, extens) {
+    let inFiles = fs.readdirSync(parentDir).filter((f) => {
+      if (
+        fs.existsSync(parentDir + "/" + f) &&
+        fs.statSync(parentDir + "/" + f).isFile() &&
+        extens.includes(path.extname(f))
+      ) {
+        return f;
+      }
+    });
+    return inFiles;
+  };
+  var replaceParentDir = function(parentDir, childFile) {
+    let extname = "." + path.extname(childFile);
+    childFile = childFile.replace(extname, "");
+    if (parentDir == startNodeDir) {
+      if (childFile.toLowerCase() == "readme.md") {
+        return "/";
+      } else {
+        return childFile;
+      }
+    } else {
+      if (childFile.toLowerCase() == "readme.md") {
+        return parentDir.replace(startNodeDir + "/", "") + "/";
+      } else {
+        return parentDir.replace(startNodeDir + "/", "") + "/" + childFile;
+      }
+    }
+  };
+  let getSidebarRecurse = function(
+    parentDir,
+    extens,
+    callBackGetSidebarRecurse
+  ) {
+    let sidebarRecurse = [];
+    let childDirsArray = getInDirsArray(parentDir);
+    let childFilesArray = getInFilesArray(parentDir, extens);
+    let replacedChildFilesArray = childFilesArray.map((childFile) => {
+      return replaceParentDir(parentDir, childFile);
+    });
+    // ファイルの配列結合
+    sidebarRecurse = sidebarRecurse.concat(replacedChildFilesArray);
 
-var dirs2 = fs.readdirSync(dirpath).filter((f) => {
-  let tmpDir=fs.existsSync(dirpath + "/" + f) &&
-    fs.statSync(dirpath + "/" + f).isDirectory()
-  return tmpDir;
-});
-var sidebarArray2 = ["/"].concat(
-  dirs2.map((dir2) => {
-    return {
-      title: dir2,
-      collapsable: true,
-      sidebarDepth: 1,
-      children: fs.readdirSync(dirpath + "/" + dir2).map((childDir) => {
-        if (childDir.toLowerCase() == "readme.md") {
-          return dir2 + "/";
-        }else if(fs.statSync(childDir).isDirectory()){
-          
-        }
-        return dir2 + "/" + childDir;
-      }),
-    };
-  })
-);
-console.log(sidebarArray2);
+    let replacedChildDirsArray = childDirsArray.map((childDir) => {
+      let unitSideBar = {
+        title: childDir,
+        collapsable: true,
+        sidebarDepth: 1,
+        children: callBackGetSidebarRecurse(
+          parentDir + "/" + childDir,
+          extens,
+          callBackGetSidebarRecurse
+        ),
+      };
+      return unitSideBar;
+    });
+    if (replacedChildDirsArray.children.length != 0) {
+      sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
+    }
+    return sidebarRecurse;
+  };
+  let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
+  console.log(...extens);
+  console.log(sidebar);
+  return sidebar;
+}
 
 module.exports = {
   // ベースURL
@@ -258,7 +290,8 @@ module.exports = {
     //   appKey: '...', // your appKey
     // }
     sidebar: {
-      "/docs/": sidebarArray,
+      //
+      "/docs/": getSidebar("./docs", ".md", ".vue"),
     },
   },
 };
