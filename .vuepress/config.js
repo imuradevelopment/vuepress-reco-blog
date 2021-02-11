@@ -31,9 +31,9 @@ function getSidebar(parentDir, ...extens) {
     childFile = childFile.replace(extname, "");
     if (parentDir == startNodeDir) {
       if (childFile.toLowerCase() == "readme.md") {
-        return "/";
+        return startNodeDir.substring(2) + "/";
       } else {
-        return childFile;
+        return startNodeDir.substring(2) + "/" + childFile;
       }
     } else {
       if (childFile.toLowerCase() == "readme.md") {

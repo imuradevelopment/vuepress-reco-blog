@@ -67,22 +67,21 @@ function getSidebar(parentDir, ...extens) {
           parentDir + "/" + childDir,
           extens,
           callBackGetSidebarRecurse
-          ),
-        };
-        return unitSideBar;
-      });
-      replacedChildDirsArray = replacedChildDirsArray.filter(
-        (unitSideBar) => unitSideBar.children.length != 0
-      );
-      sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
-      return sidebarRecurse;
-    };
-    let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
-    console.log(...extens);
-    console.log(sidebar);
-    return sidebar;
+        ),
+      };
+      return unitSideBar;
+    });
+    replacedChildDirsArray = replacedChildDirsArray.filter(
+      (unitSideBar) => unitSideBar.children.length != 0
+    );
+    sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
+    return sidebarRecurse;
+  };
+  let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
+  console.log(...extens);
+  console.log(sidebar);
+  return sidebar;
 }
-
 
 console.log(getSidebar("./docs", ".md", ".vue"));
 console.log("test");
