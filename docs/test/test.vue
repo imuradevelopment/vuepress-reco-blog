@@ -1,3 +1,15 @@
+---
+title: test
+date: 2020-10-01
+categories:
+ - vue
+tags:
+ - vue
+publish: true
+isTimeLine: true
+sidebar: true
+isComment: false
+---
 <template>
   <div>
     <h2>-------- docs --------</h2>
