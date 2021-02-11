@@ -1,4 +1,3 @@
-//.vuepress/config.js
 const fs = require("fs");
 const path = require("path");
 
@@ -71,9 +70,10 @@ function getSidebar(parentDir, ...extens) {
       };
       return unitSideBar;
     });
-    if (replacedChildDirsArray.children.length != 0) {
-      sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
-    }
+    replacedChildDirsArray = replacedChildDirsArray.filter(
+      (unitSideBar) => unitSideBar.children.length != 0
+    );
+    sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
     return sidebarRecurse;
   };
   let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);

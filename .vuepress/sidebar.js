@@ -69,10 +69,11 @@ function getSidebar(parentDir, ...extens) {
           callBackGetSidebarRecurse
           ),
         };
-        if (sidebarRecurse.children.length != 0) {
-          return unitSideBar;
-        }
+        return unitSideBar;
       });
+      replacedChildDirsArray = replacedChildDirsArray.filter(
+        (unitSideBar) => unitSideBar.children.length != 0
+      );
       sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
       return sidebarRecurse;
     };
