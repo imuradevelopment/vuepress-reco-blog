@@ -32,9 +32,9 @@ function getSidebar(parentDir, ...extens) {
     childFile = childFile.replace(extname, "");
     if (parentDir == startNodeDir) {
       if (childFile.toLowerCase() == "readme.md") {
-        return startNodeDir.substring(2) + "/";
+        return "";
       } else {
-        return startNodeDir.substring(2) + "/" + childFile;
+        return childFile;
       }
     } else {
       if (childFile.toLowerCase() == "readme.md") {
@@ -67,22 +67,21 @@ function getSidebar(parentDir, ...extens) {
           parentDir + "/" + childDir,
           extens,
           callBackGetSidebarRecurse
-          ),
-        };
-        return unitSideBar;
-      });
-      replacedChildDirsArray = replacedChildDirsArray.filter(
-        (unitSideBar) => unitSideBar.children.length != 0
-      );
-      sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
-      return sidebarRecurse;
-    };
-    let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
-    console.log(...extens);
-    console.log(sidebar);
-    return sidebar;
+        ),
+      };
+      return unitSideBar;
+    });
+    replacedChildDirsArray = replacedChildDirsArray.filter(
+      (unitSideBar) => unitSideBar.children.length != 0
+    );
+    sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
+    return sidebarRecurse;
+  };
+  let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
+  console.log(...extens);
+  console.dir(sidebar);
+  return sidebar;
 }
 
-
-console.log(getSidebar("./docs", ".md", ".vue"));
+console.dir(getSidebar("./docs", ".md", ".vue"));
 console.log("test");

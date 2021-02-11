@@ -1,3 +1,4 @@
+//.vuepress/config.js
 const fs = require("fs");
 const path = require("path");
 
@@ -31,9 +32,9 @@ function getSidebar(parentDir, ...extens) {
     childFile = childFile.replace(extname, "");
     if (parentDir == startNodeDir) {
       if (childFile.toLowerCase() == "readme.md") {
-        return startNodeDir.substring(2) + "/";
+        return "";
       } else {
-        return startNodeDir.substring(2) + "/" + childFile;
+        return childFile;
       }
     } else {
       if (childFile.toLowerCase() == "readme.md") {
@@ -78,7 +79,7 @@ function getSidebar(parentDir, ...extens) {
   };
   let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
   console.log(...extens);
-  console.log(sidebar);
+  console.dir(sidebar);
   return sidebar;
 }
 
