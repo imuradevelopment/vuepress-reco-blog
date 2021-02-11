@@ -1,17 +1,8 @@
----
-title: test
-date: 2020-10-01
-categories:
- - vue
-tags:
- - vue
-publish: true
-isTimeLine: true
-sidebar: true
-isComment: false
----
 <template>
-  <div>
+  <html>
+    <head>
+      <title>testvue</title>
+    </head>
     <h2>-------- docs --------</h2>
     <section>
       <article v-for="doc in docs">
@@ -26,7 +17,7 @@ isComment: false
         <pre>{{JSON.stringify(blog.frontmatter, null, 2)}}</pre>
       </article>
     </section>
-  </div>
+  </html>
 </template>
 
 <script>
