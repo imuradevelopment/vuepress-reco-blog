@@ -157,7 +157,7 @@ module.exports = {
       "@vuepress/pwa",
       {
         serviceWorker: true,
-        updatePopup: true,
+        //updatePopup: true,
         updatePopup: {
           message: "コンテンツが新しく配信されています。",
           buttonText: "更新する",
