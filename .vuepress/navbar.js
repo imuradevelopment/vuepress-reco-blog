@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-function getSidebar(parentDir, ...extens) {
+function getNavItem(parentDir, ...extens) {
   var startNodeDir = parentDir;
   var getInDirsArray = function(parentDir) {
     let inDirs = fs.readdirSync(parentDir).filter((f) => {
@@ -32,56 +32,110 @@ function getSidebar(parentDir, ...extens) {
     childFile = childFile.replace(extname, "");
     if (parentDir == startNodeDir) {
       if (childFile.toLowerCase() == "readme.md") {
-        return startNodeDir.substring(2) + "/";
+        return startNodeDir.substring(1) + "/";
       } else {
-        return startNodeDir.substring(2) + "/" + childFile;
+        return startNodeDir.substring(1) + "/" + childFile;
       }
     } else {
       if (childFile.toLowerCase() == "readme.md") {
-        return parentDir.replace(startNodeDir + "/", "") + "/";
+        return parentDir.substring(1) + "/";
       } else {
-        return parentDir.replace(startNodeDir + "/", "") + "/" + childFile;
+        return parentDir.substring(1) + "/" + childFile;
       }
     }
   };
-  let getSidebarRecurse = function(
+  let getNavItemRecurce = function(
     parentDir,
     extens,
-    callBackGetSidebarRecurse
+    callBackgetNavItemRecurce
   ) {
-    let sidebarRecurse = [];
+    let navItemRecurce = [];
     let childDirsArray = getInDirsArray(parentDir);
     let childFilesArray = getInFilesArray(parentDir, extens);
     let replacedChildFilesArray = childFilesArray.map((childFile) => {
       return replaceParentDir(parentDir, childFile);
     });
     // ファイルの配列結合
-    sidebarRecurse = sidebarRecurse.concat(replacedChildFilesArray);
+    if (parentDir == startNodeDir){
+      navItemRecurce = navItemRecurce.concat(
+          [{
+            text: startNodeDir.substring(2,startNodeDir.length-1),
+            items: replacedChildFilesArray
+          }]
+        );
+    }else{
+      navItemRecurce = navItemRecurce.concat(replacedChildFilesArray);
+    }
 
     let replacedChildDirsArray = childDirsArray.map((childDir) => {
-      let unitSideBar = {
-        title: childDir,
-        collapsable: true,
-        sidebarDepth: 1,
-        children: callBackGetSidebarRecurse(
+      let unitnavItem = {
+        text: childDir,
+        items: callBackgetNavItemRecurce(
           parentDir + "/" + childDir,
           extens,
-          callBackGetSidebarRecurse
+          callBackgetNavItemRecurce
         ),
       };
-      return unitSideBar;
+      return unitnavItem;
     });
     replacedChildDirsArray = replacedChildDirsArray.filter(
-      (unitSideBar) => unitSideBar.children.length != 0
+      (unitnavItem) => unitnavItem.items.length != 0
     );
-    sidebarRecurse = sidebarRecurse.concat(replacedChildDirsArray);
-    return sidebarRecurse;
+    navItemRecurce = navItemRecurce.concat(replacedChildDirsArray);
+    return navItemRecurce;
   };
-  let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
+  let navItem = getNavItemRecurce(parentDir, extens, getNavItemRecurce);
   console.log(...extens);
-  console.log(sidebar);
-  return sidebar;
+  console.dir(navItem);
+  return navItem;
 }
 
-console.log(getSidebar("./docs", ".md", ".vue"));
+console.dir(getNavItem("./docs", ".md", ".vue"));
+
 console.log("test");
+
+[
+  {
+    text: "folderName1",
+    items: [
+      {
+        text: "folderName2",
+        items: [
+          /*  */
+        ],
+      },
+    ],
+  },
+  {
+    text: "folderName3",
+    items: [
+      /*  */
+    ],
+  },
+];
+[
+  "/docs/",
+  "/docs/template.md",
+  { text: "django", items: ["/docs/django/drf.md"] },
+  {
+    text: "infrastructure",
+    items: [
+      "/docs/infrastructure/",
+      "/docs/infrastructure/template.md",
+      [Object],
+      [Object],
+    ],
+  },
+  { text: "javascript", items: ["/docs/javascript/"] },
+  { text: "profile", items: ["/docs/profile/"] },
+  {
+    text: "test",
+    items: ["/docs/test/", "/docs/test/template.md", [Object], [Object]],
+  },
+  { text: "typescript", items: ["/docs/typescript/"] },
+  { text: "vuejs", items: ["/docs/vuejs/", "/docs/vuejs/sidebarSetting.md"] },
+  {
+    text: "vuepress",
+    items: ["/docs/vuepress/markdown.md", "/docs/vuepress/vuepress.md"],
+  },
+];

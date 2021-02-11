@@ -1,10 +1,5 @@
 ---
-sidebar: false
 home: true
-heroText:
-  - "test2"
-  - "test1"
-tagline: "test"
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',
@@ -16,7 +11,6 @@ tagline: "test"
 # }
 bgImageStyle: { height: "450px" }
 ---
-
 <style>
 .hero h1 {
   text-transform: uppercase; 

@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
+// sidebar 自動化
 function getSidebar(parentDir, ...extens) {
   var startNodeDir = parentDir;
   var getInDirsArray = function(parentDir) {
@@ -89,13 +90,14 @@ module.exports = {
   // 多言語対応
   locales: {
     "/": {
-      lang: "ja",
+      lang: "ja-JP",
     },
   },
   // タイトル
   title: "VanillaNote",
   // 説明
   description: "Information is not knowledge.",
+
   // HEAD
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }],
@@ -107,17 +109,14 @@ module.exports = {
       },
     ],
     //["link", { rel: "manifest", href: "/manifest.json" }],
-    // ["script", { src: "/bg.js" }],
   ],
 
   // 開発用サーバー
   host: "0.0.0.0",
-  // ポート
   port: "8080",
   // クライアントの一時ディレクトリ
   //temp: "/path/to/@vuepress/core/.temp",
   // 出力ディレクトリ
-  //dest: '.vuepress/dist',
   dest: "public",
   // 不明の設定
   //shouldPrefetch: () => true,
@@ -159,6 +158,10 @@ module.exports = {
       {
         serviceWorker: true,
         updatePopup: true,
+        updatePopup: {
+          message: "コンテンツが新しく配信されています。",
+          buttonText: "更新する",
+        },
       },
     ],
   ],
@@ -203,14 +206,11 @@ module.exports = {
       {
         text: "記事一覧",
         icon: "reco-message",
-        link: "/docs/",
-        // items: [
-        //   { text: "vue.js", link: "/docs/vuejs/" },
-        //   { text: "vuepress", link: "/docs/vuepress/" },
-        //   { text: "javascript", link: "/docs/javascript/" },
-        //   { text: "GitとGithub", link: "/docs/infrastructure/git&github/" },
-        //   { text: "Github", link: "/docs/infrastructure/github/" },
-        // ],
+        //link: "/docs/",
+        items: [
+          { text: "ブログ", link: "/blogs/" },
+          { text: "技術系メモ", link: "/docs/" },
+        ],
       },
       { text: "タイムライン", link: "/timeline/", icon: "reco-date" },
       {
@@ -293,6 +293,7 @@ module.exports = {
     sidebar: {
       //
       "/docs/": getSidebar("./docs", ".md", ".vue"),
+      "/blogs/": getSidebar("./blogs", ".md", ".vue"),
     },
   },
 };
