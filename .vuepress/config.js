@@ -127,15 +127,6 @@ module.exports = {
   // ファイルが見つからないとき探しに行くパターン
   pattern: ["**/*.md", "**/*.vue"],
   plugins: [
-    // [
-    //   //彩带背景 先安装在配置， npm install vuepress-plugin-ribbon --save
-    //   "ribbon",
-    //   {
-    //     size: 90, // リボンの幅、デフォルト：90
-    //     opacity: 0.8, //リボンの不透明度、デフォルト：0.3
-    //     zIndex: -1, // 背景のz-indexプロパティ、デフォルト：-1
-    //   },
-    // ],
     [
       "reading-progress",
       {
@@ -145,10 +136,7 @@ module.exports = {
     [
       "vuepress-plugin-code-copy",
       {
-        //align: "top",
-        //color: String,
         backgroundTransition: true,
-        //backgroundColor: String,
         successText: "コピー完了!",
         staticIcon: false,
       },
@@ -267,7 +255,7 @@ module.exports = {
     // 作者
     author: "Imura",
     // 作者アバター
-    authorAvatar: "/avatar.png",
+    authorAvatar: "/avatar.jpg",
     // 备案号
     //    record: "xxxx",
     // プロジェクト開始
