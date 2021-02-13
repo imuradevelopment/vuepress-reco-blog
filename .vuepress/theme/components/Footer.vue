@@ -1,8 +1,8 @@
 <template>
   <div class="footer-wrapper">
     <span>
-      <!-- <i class="iconfont reco-theme"></i> -->
-      <!-- <a target="blank" href="https://vuepress-theme-reco.recoluan.com">{{`vuepress-theme-reco@${version}`}}</a> -->
+      <i class="iconfont reco-theme"></i>
+      <a target="blank" href="https://vuepress-theme-reco.recoluan.com">{{`vuepress-theme-reco@${version}`}}</a>
     </span>
     <span v-if="$themeConfig.record">
       <i class="iconfont reco-beian"></i>
@@ -43,7 +43,6 @@ export default {
         $themeConfig: { valineConfig },
         $themeLocaleConfig: { valineConfig: valineLocalConfig }
       } = this
-
       const vc = valineLocalConfig || valineConfig
       if (vc && vc.visitor != false) {
         return true
@@ -81,7 +80,6 @@ export default {
       }
     }
   }
-
 @media (max-width: $MQMobile) {
   .footer {
     text-align: left!important;

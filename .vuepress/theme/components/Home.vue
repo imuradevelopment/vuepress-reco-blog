@@ -9,9 +9,7 @@
           alt="hero">
       </ModuleTransition>
       <ModuleTransition delay="0.04">
-        <!-- <h1 v-if="recoShowModule && $frontmatter.heroText !== null">{{$frontmatter.heroText || $title || 'vuePress-theme-reco' }}</h1> -->
-        <h1 v-if="recoShowModule && $frontmatter.heroText !== null" v-for="subItem in $frontmatter.heroText">{{ ramdon($frontmatter.heroText) || $title || 'vuePress-theme-reco' }}</h1>
-
+        <h1 v-if="recoShowModule && $frontmatter.heroText !== null">{{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}</h1>
       </ModuleTransition>
       <ModuleTransition delay="0.08">
         <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
@@ -43,43 +41,32 @@
 import NavLink from '@theme/components/NavLink'
 import ModuleTransition from '@theme/components/ModuleTransition'
 import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
-
 export default {
   mixins: [moduleTransitonMixin],
   components: { NavLink, ModuleTransition },
   computed: {
-
     actionLink () {
       return {
         link: this.$frontmatter.actionLink,
         text: this.$frontmatter.actionText
       }
     },
-
     heroImageStyle () {
       return this.$frontmatter.heroImageStyle || {
         maxHeight: '200px',
         margin: '6rem auto 1.5rem'
       }
     }
-  },
-  methods: {
-    random (ary) {
-        const rnd = Math.floor(Math.random() * ary.length);
-        return ary[rnd];
-    },
-  },
+  }
 }
 </script>
 
 <style lang="stylus">
 @require '../styles/mode.styl'
-
 .home {
   padding: $navbarHeight 2rem 0;
   max-width: 960px;
   margin: 0px auto;
-
   .hero {
     text-align: center;
     h1 {
@@ -87,17 +74,14 @@ export default {
       font-size: 2.5rem;
       color: var(--text-color);
     }
-
     h1, .description, .action {
       margin: 1.8rem auto;
     }
-
     .description {
       font-size: 1.6rem;
       line-height: 1.3;
       color: var(--text-color);
     }
-
     .action-button {
       display: inline-block;
       font-size: 1.2rem;
@@ -108,13 +92,11 @@ export default {
       transition: background-color 0.1s ease;
       box-sizing: border-box;
       load-start()
-
       &:hover {
         background-color: lighten($accentColor, 10%);
       }
     }
   }
-
   .features {
     border-top: 1px solid var(--border-color);;
     padding: 1.2rem 0;
@@ -125,7 +107,6 @@ export default {
     align-content: stretch;
     justify-content: space-between;
   }
-
   .feature {
     flex-grow: 1;
     flex-basis: 30%;
@@ -138,55 +119,45 @@ export default {
       border-bottom: none;
       padding-bottom: 0;
     }
-
     &:hover {
       transform scale(1.05)
     }
   }
 }
-
 @media (max-width: $MQMobile) {
   .home {
     .features {
       flex-direction: column;
     }
-
     .feature {
       max-width: 100%;
       padding: 0 2.5rem;
     }
   }
 }
-
 @media (max-width: $MQMobileNarrow) {
   .home {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-
     .hero {
       img {
         max-height: 210px;
         margin: 2rem auto 1.2rem;
       }
-
       h1 {
         font-size: 2rem;
       }
-
       h1, .description, .action {
         margin: 1.2rem auto;
       }
-
       .description {
         font-size: 1.2rem;
       }
-
       .action-button {
         font-size: 1rem;
         padding: 0.6rem 1.2rem;
       }
     }
-
     .feature {
       h2 {
         font-size: 1.25rem;
