@@ -22,21 +22,3 @@ function getRandomBgImage() {
   return "/images/freeImage/" + inFiles[index];
 }
 // -------------------------------------------------------------------
-let bgImagePath = getRandomBgImage();
-try {
-  fs.writeFileSync("README.md", "---");
-  fs.appendFileSync("README.md", "home: true");
-  fs.appendFileSync("README.md", "bgImage: /images/freeImage/65.jpg");
-  fs.appendFileSync("README.md", "heroText: TESTfunction");
-  fs.appendFileSync("README.md", "tagline: test");
-  fs.appendFileSync("README.md", "---");
-} catch (e) {
-  console.log(e.message);
-}
-
-// ---
-// home: true
-// bgImage: /images/freeImage/65.jpg
-// heroText: TEST
-// tagline: test
-// ---
