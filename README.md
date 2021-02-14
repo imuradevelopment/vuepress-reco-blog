@@ -5,11 +5,18 @@ heroText: VANILLA NOTE
 tagline: 
 ---
 
-<style module>
+<style>
+.hero {
+  padding: 0 0 !important;
+}
 .overlay {
+  align-items: center;
+  justify-content: center;
   height:100%;
   width:100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  padding: 0 20px;
 }
 </style>
 
