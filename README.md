@@ -6,8 +6,8 @@ tagline:
 ---
 
 <style module>
-.example {
-  color: #41b883;
+.hero {
+  background: rgba(0, 0, 0, 0.6);
 }
 </style>
 
