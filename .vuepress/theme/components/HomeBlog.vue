@@ -1,28 +1,30 @@
 <template>
   <div class="home-blog">
     <div class="hero" :style="{ ...bgImageStyle }">
-      <div>
-        <ModuleTransition>
-          <img
-            class="hero-img"
-            v-if="recoShowModule && $frontmatter.heroImage"
-            :style="heroImageStyle || {}"
-            :src="$withBase($frontmatter.heroImage)"
-            alt="hero"
-          />
-        </ModuleTransition>
+      <div class="overlay">
+        <div>
+          <ModuleTransition>
+            <img
+              class="hero-img"
+              v-if="recoShowModule && $frontmatter.heroImage"
+              :style="heroImageStyle || {}"
+              :src="$withBase($frontmatter.heroImage)"
+              alt="hero"
+            />
+          </ModuleTransition>
 
-        <ModuleTransition delay="0.04">
-          <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
-            {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
-          </h1>
-        </ModuleTransition>
+          <ModuleTransition delay="0.04">
+            <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
+              {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
+            </h1>
+          </ModuleTransition>
 
-        <ModuleTransition delay="0.08">
-          <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
-            {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }}
-          </p>
-        </ModuleTransition>
+          <ModuleTransition delay="0.08">
+            <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
+              {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }}
+            </p>
+          </ModuleTransition>
+        </div>
       </div>
     </div>
 
