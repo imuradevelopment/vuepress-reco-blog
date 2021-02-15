@@ -30,7 +30,7 @@ export default {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
       }
-      let index = getRandomInt(1, 53);
+      let index = getRandomInt(1, 34);
       return "url(/images/jpg/" + index + ".jpg)";
     };
     document.getElementsByClassName("hero")[0].style.backgroundImage = getRandomBgImage()
