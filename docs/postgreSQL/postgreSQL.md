@@ -20,19 +20,19 @@ sidebar: true
 
 #### サーバの起動
 
-`$ pg_ctl start -D /usr/local/var/postgres`
+`pg_ctl start -D /usr/local/var/postgres`
 
 #### サーバの終了
 
-`$ pg_ctl stop -D /usr/local/var/postgres`
+`pg_ctl stop -D /usr/local/var/postgres`
 
 #### サーバが起動しているかの確認
 
-`$ ps aux | grep postgres`
+`tasklist | ? { $_ -like "postgres*" }`
 
 #### データベース接続
 
-`$ psql -d database -U user -h host`
+`psql -d database -U user -h host`
 
 - -d: データベース名(未指定だと、ログインユーザー名のデータベースに接続する)
 - -U: ユーザ名(未指定だと、ログインユーザー名になる)
@@ -40,15 +40,15 @@ sidebar: true
 
 #### データベース一覧表示
 
-`$ psql -l`
+`psql -l`
 
 #### PostgreSql バージョン表示
 
-`$ psql -V`
+`psql -V`
 
 #### PostgreSql に関するヘルプ
 
-`$ psql -help`
+`psql -help`
 
 ## psql 上で使うコマンド
 
@@ -100,15 +100,6 @@ postgres の部分には接続中の DB 名が入る。
 
 `postgres=# \i filename.sql`
 ファイルから入力を読み取り、実行する。
-
-#### コマンドラインの履歴の表示
-
-`postgres=# \s`
-\s の後にファイル名を入力すると、そのファイル名に結果を出力する。
-
-#### '\'に関するヘルプの表示
-
-`postgres=# \?`
 
 #### シェル上のコマンドを使いたい場合
 
