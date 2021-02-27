@@ -156,7 +156,7 @@ module.exports = {
   markdown: {
     //extractHeaders: ["h2", "h3", "h4"],
     //lineNumbers: true,
-    toc: { includeLevel: [1, 2, 3] },
+    toc: { includeLevel: [2, 3, 4, 5, 6] },
     anchor: {
       permalink: true,
       permalinkSymbol: "#",
