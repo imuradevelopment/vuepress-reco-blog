@@ -144,7 +144,7 @@ ORDER BY
 	fcolor;
 ```
 ### WHERE (clause)
-SELECT句から返された行をフィルタリングするための条件を指定する。  
+SELECTで評価される行をフィルタリングするための条件を指定する。  
 WHERE句は、SELECT文のFROM句の直後に記述する。  
 条件はtrue, false, unknownのいずれかに評価されなければならず、AND および OR 演算子を使用したブールを返す式の組み合わせになる。  
 条件が真と評価される行のみを結果セットとする。  
@@ -275,11 +275,11 @@ FETCH FIRST 5 ROW ONLY;
 ### JOIN系
 PostgreSQLは、内部結合、左結合、右結合、完全外部結合、クロス結合、自然結合、および自己結合と呼ばれる特別な種類の結合をサポートしている。  
 それぞれ関連テーブル間の共通カラムの値に基づいて、1つ以上のテーブルからのカラムを結合するために使用される。  
+↓内部, 外部, 完全結合  
+![An image](/sqljoinimages/PostgreSQL-Joins-768x465.png)
 #### INNER JOIN句
-内部結合は、最初のテーブル( basket_a)を取得し、fruit_a列の単一レコード値と2番目のテーブル( basket_b)のfruit_b列の単一レコード値を順に比較します。一致した両方のテーブルの列を含む新しい行を作成し、この新しい行を結果セットとします。
-
+INNER JOINは、最初のテーブル( basket_a)を取得し、fruit_a列と次のテーブル( basket_b)のfruit_b列を順に比較します。値が一致した両方のテーブルの列を含む新しい行を作成し、結果セットに追加します。
 ![An image](/sqljoinimages/PostgreSQL-Join-Inner-Join.png)
-
 ```SQL
 # SELECT * FROM basket_a;
 #  a | fruit_a
@@ -315,10 +315,135 @@ INNER JOIN basket_b
 #  1 | Apple   | 2 | Apple
 #  2 | Orange  | 1 | Orange
 ```
-#### LEFT JOIN句
+#### LEFT JOIN句 (LEFT OUTER JOIN句)
+LEFT JOINは、左テーブル( basket_a)からデータを取得し、fruit_a列の値と、 右テーブル（basket_b）のfruit_b列の値を順に比較します。  
+値が一致した場合、LEFT JOINは両方のテーブルの列を含む新しい行を作成し、この新しい行を結果セットに追加します。(結果セットの行#1と#2を参照)。  
+値が一致しない場合も、同様に新しい行を作成し結果セットに追加します。しかし、右のテーブル( basket_b)の列をnullで埋めます。(結果セットの行#3と#4を参照してください)。  
+LEFT JOINとLEFT OUTER JOINは同義。  
+RIGHT JOINは逆の動作をする。  
+![An image](/sqljoinimages/PostgreSQL-Join-Left-Join.png)  
+↓左テーブルのみに存在する行を選択した場合  
+![An image](/sqljoinimages/PostgreSQL-Join-Left-Join-with-Where.png)  
+```SQL
+# SELECT * FROM basket_a;
+#  a | fruit_a
+# ---+----------
+#  1 | Apple
+#  2 | Orange
+#  3 | Banana
+#  4 | Cucumber
+# インデックス:
+#     "basket_a_pkey" PRIMARY KEY, btree (a)
 
+# SELECT * FROM basket_b;
+#  b |  fruit_b
+# ---+------------
+#  1 | Orange
+#  2 | Apple
+#  3 | Watermelon
+#  4 | Pear
+# インデックス:
+#     "basket_b_pkey" PRIMARY KEY, btree (b)
+
+SELECT
+    a,
+    fruit_a,
+    b,
+    fruit_b
+FROM
+    basket_a
+LEFT JOIN basket_b 
+   ON fruit_a = fruit_b;
+#  a | fruit_a  | b | fruit_b
+# ---+----------+---+---------
+#  1 | Apple    | 2 | Apple
+#  2 | Orange   | 1 | Orange
+#  3 | Banana   |   | 
+#  4 | Cucumber |   |
+
+/*
+  左テーブルのみに存在する行を結果セットとする。
+*/
+SELECT
+    a,
+    fruit_a,
+    b,
+    fruit_b
+FROM
+    basket_a
+LEFT JOIN basket_b 
+    ON fruit_a = fruit_b
+WHERE b IS NULL;
+#  a | fruit_a  | b | fruit_b
+# ---+----------+---+---------
+#  3 | Banana   |   |
+#  4 | Cucumber |   |
+```
 #### FULL OUTER JOIN句
+完全外部結合または完全結合は、左右両方のテーブルのすべての行を含む結果セットを返す。  
+一致する行がない場合、テーブルの列はNULLで埋める。  
+![An image](/sqljoinimages/PostgreSQL-Join-Full-Outer-Join.png)  
+↓各テーブルにのみ存在する行を選択した場合  
+![An image](/sqljoinimages/PostgreSQL-Join-Full-Outer-Join-with-Where.png)  
+```SQL
+# SELECT * FROM basket_a;
+#  a | fruit_a
+# ---+----------
+#  1 | Apple
+#  2 | Orange
+#  3 | Banana
+#  4 | Cucumber
+# インデックス:
+#     "basket_a_pkey" PRIMARY KEY, btree (a)
 
+# SELECT * FROM basket_b;
+#  b |  fruit_b
+# ---+------------
+#  1 | Orange
+#  2 | Apple
+#  3 | Watermelon
+#  4 | Pear
+# インデックス:
+#     "basket_b_pkey" PRIMARY KEY, btree (b)
+
+SELECT
+    a,
+    fruit_a,
+    b,
+    fruit_b
+FROM
+    basket_a
+FULL OUTER JOIN basket_b 
+    ON fruit_a = fruit_b;
+#  a | fruit_a  | b |  fruit_b
+# ---+----------+---+------------
+#  1 | Apple    | 2 | Apple
+#  2 | Orange   | 1 | Orange
+#  3 | Banana   |   |
+#  4 | Cucumber |   | 
+#    |          | 3 | Watermelon
+#    |          | 4 | Pear
+
+/*
+  各テーブルにのみ存在する行を結果セットとする。
+*/
+SELECT
+    a,
+    fruit_a,
+    b,
+    fruit_b
+FROM
+    basket_a
+FULL JOIN basket_b 
+   ON fruit_a = fruit_b
+WHERE a IS NULL OR b IS NULL;
+#  a | fruit_a  | b |  fruit_b
+# ---+----------+---+------------
+#  3 | Banana   |   |
+#  4 | Cucumber |   |
+#    |          | 3 | Watermelon
+#    |          | 4 | Pear
+```
 #### CROSS JOIN句
 
 ### GROUP BY (clause)
