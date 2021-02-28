@@ -1,5 +1,5 @@
 ---
-title: postgreSQL
+title: postgreSQLチートシート
 date: 2020-10-01
 categories:
   - postgreSQL
@@ -12,7 +12,7 @@ isTimeLine: true
 sidebar: true
 ---
 
-# postgreSQL メモ
+# postgreSQLチートシート
 
 [[TOC]]
 
@@ -105,3 +105,6 @@ postgres の部分には接続中の DB 名が入る。
 
 `postgres=# \! command`
 *command*の部分に ls や pwd を入れると psql 上でもシェル上のコマンドが実行できる。
+
+#### more表示をやめ、一括表示にする。
+`postgres=# \pset pager off`
