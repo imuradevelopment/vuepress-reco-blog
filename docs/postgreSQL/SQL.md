@@ -277,7 +277,9 @@ PostgreSQLは、内部結合、左結合、右結合、完全外部結合、ク�
 それぞれ関連テーブル間の共通カラムの値に基づいて、1つ以上のテーブルからのカラムを結合するために使用される。  
 #### INNER JOIN句
 内部結合は、最初のテーブル( basket_a)を取得し、fruit_a列の単一レコード値と2番目のテーブル( basket_b)のfruit_b列の単一レコード値を順に比較します。一致した両方のテーブルの列を含む新しい行を作成し、この新しい行を結果セットとします。
-![An image](./sqljoinimages/PostgreSQL-Join-Inner-Join.png)
+
+![An image](/sqljoinimages/PostgreSQL-Join-Inner-Join.png)
+
 ```SQL
 # SELECT * FROM basket_a;
 #  a | fruit_a
