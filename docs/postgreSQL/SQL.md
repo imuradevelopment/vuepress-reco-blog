@@ -59,8 +59,9 @@ SELECT
 FROM 
    customer;
 ```
-### AS (clause)
-クエリの列に一時的な名前を割り当てる。  
+### 列エイリアスAS (clause)
+クエリ実行中に列に一時的な名前を割り当てる。  
+※ASは省略可  
 ```SQL
 SELECT 
    first_name, 
@@ -315,6 +316,42 @@ INNER JOIN basket_b
 #  1 | Apple   | 2 | Apple
 #  2 | Orange  | 1 | Orange
 ```
+サンプルDBでの3テーブルのINNER JOIN  
+![An image](/sqljoinimages/customer-payment-staff-tables.png)
+```SQL
+/*
+  各スタッフは複数回、または0回の支払い対応をしており、各支払い対応は1人のスタッフが担当します。
+  各顧客は複数回、または0回の支払いを行っており、各支払いは1人の顧客によって行われます。
+*/
+SELECT
+	c.customer_id,
+	c.first_name customer_first_name,
+	c.last_name customer_last_name,
+	s.first_name staff_first_name,
+	s.last_name staff_last_name,
+	amount,
+	payment_date
+FROM
+	customer c
+INNER JOIN payment p 
+    ON p.customer_id = c.customer_id
+INNER JOIN staff s 
+    ON p.staff_id = s.staff_id
+ORDER BY payment_date
+LIMIT 10;
+#  customer_id | customer_first_name | customer_last_name | staff_first_name | staff_last_name | amount |        payment_date
+# -------------+---------------------+--------------------+------------------+-----------------+--------+----------------------------
+#          416 | Jeffery             | Pinson             | Jon              | Stephens        |   2.99 | 2007-02-14 21:21:59.996577
+#          516 | Elmer               | Noe                | Jon              | Stephens        |   4.99 | 2007-02-14 21:23:39.996577
+#          239 | Minnie              | Romero             | Mike             | Hillyer         |   4.99 | 2007-02-14 21:29:00.996577
+#          592 | Terrance            | Roush              | Jon              | Stephens        |   6.99 | 2007-02-14 21:41:12.996577
+#           49 | Joyce               | Edwards            | Mike             | Hillyer         |   0.99 | 2007-02-14 21:44:52.996577
+#          264 | Gwendolyn           | May                | Jon              | Stephens        |   3.99 | 2007-02-14 21:44:53.996577
+#           46 | Catherine           | Campbell           | Mike             | Hillyer         |   4.99 | 2007-02-14 21:45:29.996577
+#          481 | Herman              | Devore             | Jon              | Stephens        |   2.99 | 2007-02-14 22:03:35.996577
+#          139 | Amber               | Dixon              | Jon              | Stephens        |   2.99 | 2007-02-14 22:11:22.996577
+#          595 | Terrence            | Gunderson          | Jon              | Stephens        |   2.99 | 2007-02-14 22:16:01.996577
+```
 #### LEFT JOIN句 (LEFT OUTER JOIN句)
 LEFT JOINは、左テーブル( basket_a)からデータを取得し、fruit_a列の値と、 右テーブル（basket_b）のfruit_b列の値を順に比較します。  
 値が一致した場合、LEFT JOINは両方のテーブルの列を含む新しい行を作成し、この新しい行を結果セットに追加します。(結果セットの行#1と#2を参照)。  
@@ -446,6 +483,41 @@ WHERE a IS NULL OR b IS NULL;
 ```
 #### CROSS JOIN句
 
+### テーブルエイリアスAS (clause)
+クエリの実行中にテーブルに新しい名前を一時的に割り当てる。  
+※ASは省略可  
+JOIN句を使用して、同じ列名を持つ複数のテーブルからデータをクエリする場合、複数のテーブルに由来する同じ列名を完全に修飾(table_name.column_name)せずに使用すると、エラーが発生する。  
+その場合FROMおよびJOIN句でテーブル名のテーブルエイリアスを使用する。  
+```SQL
+/*
+  JOINでのテーブルエイリアスの使用
+  クエリの見通しを良くする
+*/
+SELECT
+	c.customer_id,
+	first_name,
+	amount,
+	payment_date
+FROM
+	customer c
+INNER JOIN payment p 
+    ON p.customer_id = c.customer_id
+ORDER BY 
+   payment_date DESC;
+
+/*
+  自己結合
+  同じクエリでテーブルを2回参照する
+*/
+SELECT
+    e.first_name employee,
+    m .first_name manager
+FROM
+    employee e
+INNER JOIN employee m 
+    ON m.employee_id = e.manager_id
+ORDER BY manager;
+```
 ### GROUP BY (clause)
 行をグループにグループ化します。
 ### HAVING (clause)
