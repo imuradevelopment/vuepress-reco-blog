@@ -320,8 +320,7 @@ INNER JOIN basket_b
 ![An image](/sqljoinimages/customer-payment-staff-tables.png)
 ```SQL
 /*
-  各スタッフは複数回、または0回の支払い対応をしており、各支払い対応は1人のスタッフが担当します。
-  各顧客は複数回、または0回の支払いを行っており、各支払いは1人の顧客によって行われます。
+  支払い履歴を調べる
 */
 SELECT
 	c.customer_id,
@@ -416,6 +415,36 @@ WHERE b IS NULL;
 #  3 | Banana   |   |
 #  4 | Cucumber |   |
 ```
+サンプルDBでの3テーブルのLEFT JOIN  
+![An image](/sqljoinimages/film-and-inventory-tables.png)
+```SQL
+/*
+  DVDの在庫を調べる
+*/
+SELECT
+	film.film_id,
+	title,
+	inventory_id
+FROM
+	film
+LEFT JOIN inventory 
+    ON inventory.film_id = film.film_id
+ORDER BY title;
+
+/*
+  在庫のないDVDを調べる
+*/
+SELECT
+	f.film_id,
+	title,
+	inventory_id
+FROM
+	film f
+LEFT JOIN inventory i
+   ON i.film_id = f.film_id
+WHERE i.film_id IS NULL
+ORDER BY title;
+```
 #### FULL OUTER JOIN句
 完全外部結合または完全結合は、左右両方のテーブルのすべての行を含む結果セットを返す。  
 一致する行がない場合、テーブルの列はNULLで埋める。  
@@ -481,8 +510,40 @@ WHERE a IS NULL OR b IS NULL;
 #    |          | 3 | Watermelon
 #    |          | 4 | Pear
 ```
+#### SELF JOIN
+階層的なデータを問い合わせたり、同じテーブル内の行を比較したりするために自己結合を使用する。  
+![An image](/sqljoinimages/film_table.png)  
+```SQL
+/*
+  同じ長さの映画のすべての組み合わせを検索調べる。
+*/
+SELECT
+    f1.title,
+    f2.title,
+    f1.length
+FROM
+    film f1
+INNER JOIN film f2 
+    ON f1.film_id <> f2.film_id AND 
+       f1.length = f2.length;
+```
 #### CROSS JOIN句
+2つの以上のテーブル内の行の積集合を求める為に使用する。  
+![An image](/sqljoinimages/PostgreSQL-CROSS-JOIN-illustration.png)  
+```SQL
+SELECT *
+FROM T1
+CROSS JOIN T2;
 
+# label | score
+# -------+-------
+#  A     |     1
+#  B     |     1
+#  A     |     2
+#  B     |     2
+#  A     |     3
+#  B     |     3
+```
 ### テーブルエイリアスAS (clause)
 クエリの実行中にテーブルに新しい名前を一時的に割り当てる。  
 ※ASは省略可  
