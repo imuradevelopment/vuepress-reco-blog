@@ -888,9 +888,138 @@ ORDER BY
 #               0 |                1 | ABC   |         | 300
 #               0 |                1 | XYZ   |         | 400
 ```
-#### ROLLUP
-複数のグループ化集合を生成する。  
+#### CUBE
+GROUP BY句のサブ句です。  
+CUBEを使用すると、複数のグループ化セットを生成することができます。  
+最初に、SELECT 文の GROUP BY 節で CUBE サブ句を指定します。  
+2 番目に、SELECT リストで、分析する列 (ディメンジョンまたはディメンジョン列) と集計関数式を指定します。  
+3 番目に、GROUP BY 節で、CUBE サブ句の括弧内のディメンジョン・カラムを指定します。  
+クエリは、CUBE で指定されたディメンジョン列に基づいて、可能なすべてのグループ化セットを生成します。  
+一般的に、CUBEで指定した列の数をn個とすると、2^n個の組み合わせになります。  
+下記は同じ意味を表します。  
 ```SQL
+CUBE(c1,c2,c3) 
+
+GROUPING SETS (
+    (c1,c2,c3), 
+    (c1,c2),
+    (c1,c3),
+    (c2,c3),
+    (c1),
+    (c2),
+    (c3), 
+    ()
+ ) 
+```
+```SQL
+#  brand | segment | quantity
+# -------+---------+----------
+#  ABC   | Premium |      100
+#  ABC   | Basic   |      200
+#  XYZ   | Premium |      100
+#  XYZ   | Basic   |      300
+
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    CUBE (brand, segment)
+ORDER BY
+    brand,
+    segment;
+
+#  brand | segment | sum
+# -------+---------+-----
+#  ABC   | Basic   | 200
+#  ABC   | Premium | 100
+#  ABC   |         | 300
+#  XYZ   | Basic   | 300
+#  XYZ   | Premium | 100
+#  XYZ   |         | 400
+#        | Basic   | 500
+#        | Premium | 200
+#        |         | 700
+
+```
+#### ROLLUP
+GROUP BY句のサブ句です。  
+ROLLUPを使用すると、複数のグループ化セットを生成することができます。  
+CUBEサブ句とは異なり、ROLLUPは指定された列に基づいて可能なすべてのグループ化セットを生成しません。  
+選択列のサブセットを作成するだけです。  
+入力カラム間の階層を想定し、その階層を考慮して意味のあるすべてのグループ化セットを生成します。  
+ROLLUPがレポートの小計や総計を生成するのによく使われる理由です。  
+ROLLUPの一般的な使用法は、年>月>日の階層を考慮して、年、月、日ごとのデータの集計を計算することです。  
+下記は同じ意味を表します。  
+```SQL
+ROLLUP(c1,c2,c3)
+
+GROUPING SETS (
+    (c1, c2, c3)
+    (c1, c2)
+    (c1)
+    ()
+ ) 
+```
+サンプルテーブルsalesの例  
+出力を見るとよくわかるように、3列目はABCブランドの売上高、6列目はXYZブランドの売上高を表示しています。  
+最後の行は、すべてのブランドとセグメントの合計を表示しています。  
+この例では、ブランド > セグメントという階層になっています。
+```SQL
+#  brand | segment | quantity
+# -------+---------+----------
+#  ABC   | Premium |      100
+#  ABC   | Basic   |      200
+#  XYZ   | Premium |      100
+#  XYZ   | Basic   |      300
+
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    ROLLUP (brand, segment)
+ORDER BY
+    brand,
+    segment;
+```
+サンプルDB、rentalテーブルでの例  
+![An image](/sqljoinimages/rental.png)  
+```SQL
+/*
+  ROLLUPを使って1日、1ヶ月、1年あたりのレンタル数を求めます。
+*/
+SELECT
+    EXTRACT (YEAR FROM rental_date) y,
+    EXTRACT (MONTH FROM rental_date) M,
+    EXTRACT (DAY FROM rental_date) d,
+    COUNT (rental_id)
+FROM
+    rental
+GROUP BY
+    ROLLUP (
+        EXTRACT (YEAR FROM rental_date),
+        EXTRACT (MONTH FROM rental_date),
+        EXTRACT (DAY FROM rental_date)
+    );
+
+#   y   | m | d  | count
+# ------+---+----+-------
+#  2005 | 5 | 24 |     8
+#  2005 | 5 | 25 |   137
+#  2005 | 5 | 26 |   174
+#  2005 | 5 | 27 |   166
+#  2005 | 5 | 28 |   196
+#  2005 | 5 | 29 |   154
+#  2005 | 5 | 30 |   158
+#  2005 | 5 | 31 |   163
+#  2005 | 5 |    |  1156
+#  2005 | 6 | 14 |    16
+#  2005 | 6 | 15 |   348
 ```
 ### HAVING (clause)
 グループや集計の検索条件を指定する。  
@@ -917,7 +1046,7 @@ HAVING
 #          526 | 208.58
 #          148 | 211.55
 ```
-#### UNION (operator)
+### UNION (operator)
 複数のクエリの結果セットを1つの結果セットに結合する。  
 どちらかの結果セットで利用可能な行を返す。  
 UNION演算子は結合された結果セットからすべての重複した行を削除するため、重複した行を保持したい場合、UNION ALLを使用する必要がある。  
@@ -972,7 +1101,7 @@ ORDER BY title;
 #  The Godfather            |         1972
 #  The Shawshank Redemption |         1994
 ```
-#### INTERSECT (operator)
+### INTERSECT (operator)
 複数のクエリの結果セットを1つの結果セットに結合する。  
 両方の結果セットで利用可能な行を返す。  
 INTERSECT演算子を実行するためには下記の条件を満たしている必要がある。  
@@ -1007,7 +1136,7 @@ FROM top_rated_films;
 # ---------------+--------------
 #  The Godfather |         1972
 ```
-#### EXCEPT
+### EXCEPT
 複数のクエリの結果セットを1つの結果セットに結合する。  
 最初の結果セットに存在し、2番目の結果セットに存在しない行を返す。  
 EXCEPTの動作を示す。  
