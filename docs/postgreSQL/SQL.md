@@ -28,6 +28,8 @@ sidebar: true
 述語 (Predicates)  
 - 論理演算の結果(true/false/unknown)を返す。  
 - 条件式の中などで使用。  
+演算子 (operator)
+関数 (function)
 
 ## SELECT (statement, clause)
 列を選択し結果セットとして返す。  
@@ -111,7 +113,7 @@ FROM
 ORDER BY 
 	len DESC;
 ```
-### DISTINCT (clause, 演算子?)
+### DISTINCT (clause, operator)
 SELECT句の結果セットから重複行を削除する。  
 重複のグループごとに1つの行を保持し、SELECT句の1つ以上の列に適用できる。  
 PostgreSQLはDISTINCT ON (expression) 構文を使用して、重複の各グループの「最初の」行を保持することもできる。  
@@ -580,12 +582,459 @@ INNER JOIN employee m
 ORDER BY manager;
 ```
 ### GROUP BY (clause)
-行をグループにグループ化します。
+行をグループに分割する。  
+GROUP BY句は集計関数と共に使用できるが、集計関数の使用は必須ではない。  
+サンプルDBのpaymentテーブルでの例  
+![An image](/sqljoinimages/payment.png)  
+```SQL
+/*
+  SUM関数の使用
+  各顧客の支払い合計金額を調べる。
+*/
+SELECT
+	customer_id,
+	SUM (amount)
+FROM
+	payment
+GROUP BY
+	customer_id
+ORDER BY
+	SUM (amount) DESC;
+
+#  customer_id |  sum
+# -------------+--------
+#          148 | 211.55
+#          526 | 208.58
+#          178 | 194.61
+#          137 | 191.62
+#          144 | 189.60
+#          459 | 183.63
+#          181 | 167.67
+#          410 | 167.62
+#          236 | 166.61
+#          403 | 162.67
+
+/*
+  JOINと共に使用する。
+*/
+SELECT
+	first_name || ' ' || last_name full_name,
+	SUM (amount) amount
+FROM
+	payment
+INNER JOIN customer USING (customer_id)    	
+GROUP BY
+	full_name
+ORDER BY amount;
+
+#     full_name    | amount
+# -----------------+--------
+#  Brian Wyman     |  27.93
+#  Leona Obrien    |  32.90
+#  Caroline Bowman |  37.87
+#  Anthony Schwab  |  47.85
+#  Tiffany Jordan  |  49.88
+#  Kirk Stclair    |  50.83
+#  Bobbie Craig    |  52.81
+#  Jo Fowler       |  54.85
+#  Penny Neal      |  56.84
+#  Johnny Turpin   |  57.81
+
+/*
+  COUNT関数の使用
+*/
+SELECT
+	staff_id,
+
+	COUNT (payment_id)
+FROM
+	payment
+GROUP BY
+	staff_id;
+
+#  staff_id | count
+#----------+-------
+#        1 |  7292
+#        2 |  7304
+
+/*
+  複数列での使用
+*/
+SELECT 
+	customer_id, 
+	staff_id, 
+	SUM(amount) 
+FROM 
+	payment
+GROUP BY 
+	staff_id, 
+	customer_id
+ORDER BY 
+    customer_id;
+
+#  customer_id | staff_id |  sum
+# -------------+----------+-------
+#            1 |        1 | 60.85
+#            1 |        2 | 53.85
+#            2 |        1 | 55.86
+#            2 |        2 | 67.88
+#            3 |        1 | 59.88
+#            3 |        2 | 70.88
+#            4 |        1 | 49.88
+#            4 |        2 | 31.90
+#            5 |        1 | 63.86
+#            5 |        2 | 70.79
+```
+#### GROUPING SETS
+GROUPING SETSを使用すると、1つのクエリで複数のグループ化セットを定義することができる。  
+まず下記のコードブロックに示すように、GROUP BY句の意味をもう一度考える。  
+次のコードブロックまで飛ばしてもOK  
+```SQL
+#  brand | segment | quantity
+# -------+---------+----------
+#  ABC   | Premium |      100
+#  ABC   | Basic   |      200
+#  XYZ   | Premium |      100
+#  XYZ   | Basic   |      300
+
+/*
+  ブランドで販売されている製品の数を返す。
+  (brandのグループを定義している)
+*/
+SELECT
+    brand,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    brand;
+
+#  brand | sum
+# -------+-----
+#  ABC   | 300
+#  XYZ   | 400
+
+/*
+  すべてのブランドとセグメントで販売された製品の数を返す。
+  (空のグループを定義している)
+*/
+
+SELECT SUM (quantity) FROM sales;
+
+#  sum
+# -----
+#  700
+
+/*
+1つクエリをで、複数のグループ化セットを取得する。
+これを実現するには、UNION ALLを使用して上記のすべてのクエリを組み合わせる。
+UNION ALLでは、すべての結果セットが互換性のあるデータ型で同じ数の列を持つ必要があるため、
+以下のようにそれぞれの選択リストにNULLを追加してクエリを調整する必要があります。
+*/
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    brand,
+    segment
+
+UNION ALL
+
+SELECT
+    brand,
+    NULL,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    brand
+
+UNION ALL
+
+SELECT
+    NULL,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    segment
+
+UNION ALL
+
+SELECT
+    NULL,
+    NULL,
+    SUM (quantity)
+FROM
+    sales;
+
+#  brand | segment | sum
+# -------+---------+-----
+#  XYZ   | Basic   | 300
+#  ABC   | Premium | 100
+#  ABC   | Basic   | 200
+#  XYZ   | Premium | 100
+#  ABC   |         | 300
+#  XYZ   |         | 400
+#        | Basic   | 500
+#        | Premium | 200
+#        |         | 700
+```
+このようにUNION ALL等を使用して、複数にグループを1つのクエリで取得する場合、
+- クエリが長くなる。
+- UNION前のクエリ毎にテーブルをスキャンしなければならないため、パフォーマンスの問題が生じる。  
+これらの問題を解決し、より効率的にするためにGROUP BY句のサブ句であるGROUPING SETS句が存在する。  
+前述の通り、GROUPING SETSを使用すると、1つのクエリで複数のグループ化セットを定義することができる。  
+```SQL
+#  brand | segment | quantity
+# -------+---------+----------
+#  ABC   | Premium |      100
+#  ABC   | Basic   |      200
+#  XYZ   | Premium |      100
+#  XYZ   | Basic   |      300
+
+/*
+  
+  複数のグループ化セットを取得する。
+*/
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    GROUPING SETS (
+        (brand, segment),
+        (brand),
+        (segment),
+        ()
+    );
+
+#  brand | segment | sum
+# -------+---------+-----
+#        |         | 700
+#  XYZ   | Basic   | 300
+#  ABC   | Premium | 100
+#  ABC   | Basic   | 200
+#  XYZ   | Premium | 100
+#  ABC   |         | 300
+#  XYZ   |         | 400
+#        | Basic   | 500
+#        | Premium | 200
+```
+#### GROUPING (function)
+列名または式を受け入れ、GROUP BY 節で指定されたものと一致する必要がある。  
+引数が現在のグループ化セットのメンバであればビット 0 を返し、そうでなければビット 1 を返す。  
+HAVING句でGROUPING関数を使うと、各ブランドの小計を見つけることができます。  
+```SQL
+/*
+  GROUPING関数の使用
+*/
+SELECT
+	GROUPING(brand) grouping_brand,
+	GROUPING(segment) grouping_segment,
+	brand,
+	segment,
+	SUM (quantity)
+FROM
+	sales
+GROUP BY
+	GROUPING SETS (
+		(brand),
+		(segment),
+		()
+	)
+ORDER BY
+	brand,
+	segment;
+
+#  grouping_brand | grouping_segment | brand | segment | sum
+# ----------------+------------------+-------+---------+-----
+#               0 |                1 | ABC   |         | 300
+#               0 |                1 | XYZ   |         | 400
+#               1 |                0 |       | Basic   | 500
+#               1 |                0 |       | Premium | 200
+#               1 |                1 |       |         | 700
+
+/*
+  HAVING句でのGROUPING関数の使用
+*/
+SELECT
+	GROUPING(brand) grouping_brand,
+	GROUPING(segment) grouping_segment,
+	brand,
+	segment,
+	SUM (quantity)
+FROM
+	sales
+GROUP BY
+	GROUPING SETS (
+		(brand),
+		(segment),
+		()
+	)
+HAVING GROUPING(brand) = 0	
+ORDER BY
+	brand,
+	segment;
+
+#  grouping_brand | grouping_segment | brand | segment | sum
+# ----------------+------------------+-------+---------+-----
+#               0 |                1 | ABC   |         | 300
+#               0 |                1 | XYZ   |         | 400
+```
+#### ROLLUP
+複数のグループ化集合を生成する。  
+```SQL
+```
 ### HAVING (clause)
-グループをフィルタリングします。
+グループや集計の検索条件を指定する。  
+WHERE ⇒ GROUP BY ⇒ HAVING ⇒ SELECT  
+WHERE句は行に適用され、HAVING句は行のグループに適用される。  
+サンプルDBのpaymentテーブルでの例  
+![An image](/sqljoinimages/payment.png)  
+```SQL
+/*
+  200ドル以上の支出をしている顧客を調べる。
+*/
+SELECT
+	customer_id,
+	SUM (amount)
+FROM
+	payment
+GROUP BY
+	customer_id
+HAVING
+	SUM (amount) > 200;
 
-### SET
+#  customer_id |  sum
+# -------------+--------
+#          526 | 208.58
+#          148 | 211.55
+```
+#### UNION (operator)
+複数のクエリの結果セットを1つの結果セットに結合する。  
+どちらかの結果セットで利用可能な行を返す。  
+UNION演算子は結合された結果セットからすべての重複した行を削除するため、重複した行を保持したい場合、UNION ALLを使用する必要がある。  
+UNION演算子を実行するためには下記の条件を満たしている必要がある。  
+- 両方のクエリの結果セットはカラムの数と順序が同じでなければならない。
+- データ型には互換性が無ければいけない。
+最終的な結果セットの行をソートするには、2番目のクエリでORDER BY句を使用する。  
+完全に正規化されていない類似のテーブルからのデータを結合するためにUNION演算子を使用することがよくある。  
+UNIONの動作を示す。  
+![An image](/sqljoinimages/PostgresQL-UNION.png)  
+```SQL
+#           title           | release_year
+# --------------------------+--------------
+#  The Shawshank Redemption |         1994
+#  The Godfather            |         1972
+#  12 Angry Men             |         1957
+# 
+#         title        | release_year
+# --------------------+--------------
+#  An American Pickle |         2020
+#  The Godfather      |         1972
+#  Greyhound          |         2020
 
-#### UNION
-#### INTERSECT
+/*
+  UNION演算子の使用
+*/
+SELECT * FROM top_rated_films
+UNION
+SELECT * FROM most_popular_films;
+#           title           | release_year
+# --------------------------+--------------
+#  An American Pickle       |         2020
+#  Greyhound                |         2020
+#  The Shawshank Redemption |         1994
+#  The Godfather            |         1972
+#  12 Angry Men             |         1957
+
+/*
+  UNION ALL演算子の使用
+*/
+SELECT * FROM top_rated_films
+UNION ALL
+SELECT * FROM most_popular_films
+ORDER BY title;
+
+#           title           | release_year
+# --------------------------+--------------
+#  12 Angry Men             |         1957
+#  An American Pickle       |         2020
+#  Greyhound                |         2020
+#  The Godfather            |         1972
+#  The Godfather            |         1972
+#  The Shawshank Redemption |         1994
+```
+#### INTERSECT (operator)
+複数のクエリの結果セットを1つの結果セットに結合する。  
+両方の結果セットで利用可能な行を返す。  
+INTERSECT演算子を実行するためには下記の条件を満たしている必要がある。  
+- 両方のクエリの結果セットはカラムの数と順序が同じでなければならない。
+- データ型には互換性が無ければいけない。
+INTERSECTの動作を示す。  
+![An image](/sqljoinimages/PostgreSQL-INTERSECT-Operator-300x206.png)  
+最終的な結果セットの行をソートするには、2番目のクエリでORDER BY句を使用する。  
+```SQL
+#           title           | release_year
+# --------------------------+--------------
+#  The Shawshank Redemption |         1994
+#  The Godfather            |         1972
+#  12 Angry Men             |         1957
+# 
+#         title        | release_year
+# --------------------+--------------
+#  An American Pickle |         2020
+#  The Godfather      |         1972
+#  Greyhound          |         2020
+
+/*
+  INTERSECT演算子の使用
+*/
+SELECT *
+FROM most_popular_films 
+INTERSECT
+SELECT *
+FROM top_rated_films;
+
+#      title     | release_year
+# ---------------+--------------
+#  The Godfather |         1972
+```
 #### EXCEPT
+複数のクエリの結果セットを1つの結果セットに結合する。  
+最初の結果セットに存在し、2番目の結果セットに存在しない行を返す。  
+EXCEPTの動作を示す。  
+![An image](/sqljoinimages/PostgreSQL-EXCEPT-300x202.png)  
+```SQL
+#           title           | release_year
+# --------------------------+--------------
+#  The Shawshank Redemption |         1994
+#  The Godfather            |         1972
+#  12 Angry Men             |         1957
+# 
+#         title        | release_year
+# --------------------+--------------
+#  An American Pickle |         2020
+#  The Godfather      |         1972
+#  Greyhound          |         2020
+
+/*
+  EXCEPT演算子の使用
+*/
+SELECT * FROM top_rated_films
+EXCEPT 
+SELECT * FROM most_popular_films
+ORDER BY title;
+
+#           title           | release_year
+# --------------------------+--------------
+#  12 Angry Men             |         1957
+#  The Shawshank Redemption |         1994
+```
