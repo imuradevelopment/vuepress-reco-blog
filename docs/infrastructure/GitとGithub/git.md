@@ -19,7 +19,7 @@ isComment: false
 ```ps1
 # ログ系
 # 1行表示
-git log --oneline
+git log --name-status
 
 # reset系
 # 作業コピーのリセット
