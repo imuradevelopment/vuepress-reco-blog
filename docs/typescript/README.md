@@ -6,7 +6,6 @@ categories:
 tags:
  - TypeScript
 publish: true
-sticky: 1
 isTimeLine: true
 sidebar: true
 isComment: false

@@ -5,8 +5,7 @@ categories:
  - JavaScript
 tags:
  - JavaScript
-publish: true
-sticky: 1
+publish: false
 isTimeLine: true
 sidebar: true
 isComment: false

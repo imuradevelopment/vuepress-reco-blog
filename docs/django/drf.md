@@ -9,8 +9,7 @@ tags:
  - Python
  - DjangoRESTFramework
  - Django
-publish: true
-sticky: 1
+publish: false
 isTimeLine: true
 sidebar: true
 isComment: false

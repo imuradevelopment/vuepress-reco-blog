@@ -1,5 +1,15 @@
 ---
-sideber:'auto'
+title: vuepress構築
+date: 2020-10-01
+categories:
+  - vue
+  - vuepress
+tags:
+  - vue
+  - vuepress
+publish: true
+isTimeLine: true
+sidebar: true
 ---
 
 # ブログ構築

@@ -7,8 +7,7 @@ categories:
 tags:
  - github
  - バージョン管理
-publish: true
-sticky: 1
+publish: false
 isTimeLine: true
 sidebar: true
 isComment: false
