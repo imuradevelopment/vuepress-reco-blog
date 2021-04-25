@@ -81,6 +81,7 @@ function getSidebar(parentDir, ...extens) {
   let sidebar = getSidebarRecurse(parentDir, extens, getSidebarRecurse);
   console.log(...extens);
   console.dir(sidebar);
+  // READMEに書き出して記事一覧
   return sidebar;
 }
 
