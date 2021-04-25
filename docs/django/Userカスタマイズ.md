@@ -7,6 +7,7 @@ tags:
   - django
 publish: true
 isTimeLine: true
+sticky: 1
 ---
 
 # 目次

@@ -6,7 +6,6 @@ categories:
 tags:
  - Git
 publish: true
-sticky: 1
 isTimeLine: true
 sidebar: true
 isComment: false

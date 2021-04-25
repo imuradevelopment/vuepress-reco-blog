@@ -8,6 +8,7 @@ tags:
 publish: true
 isTimeLine: true
 sidebar: true
+sticky: 1
 ---
 # SQL まとめ
 
