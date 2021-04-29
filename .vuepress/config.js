@@ -142,16 +142,16 @@ module.exports = {
         staticIcon: false,
       },
     ],
-    [
-      "@vuepress/pwa",
-      {
-        serviceWorker: false,
-        updatePopup: {
-          message: "コンテンツが新しく配信されています。",
-          buttonText: "更新する",
-        },
-      },
-    ],
+    // [
+    //   "@vuepress/pwa",
+    //   {
+    //     serviceWorker: false,
+    //     updatePopup: {
+    //       message: "コンテンツが新しく配信されています。",
+    //       buttonText: "更新する",
+    //     },
+    //   },
+    // ],
   ],
   markdown: {
     //extractHeaders: ["h2", "h3", "h4"],
