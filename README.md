@@ -39,10 +39,12 @@ export default {
     //   return "url(/images/jpg/" + index + ".jpg)";
     // };
     // document.getElementsByClassName("hero")[0].style.backgroundImage = getRandomBgImage()
-    if(nextImageNum <= 7){
-      document.getElementsByClassName("hero")[0].style.backgroundImage = document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[0-9]/g, (Number(document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[^0-9]/g, '')) + 1).toString());
-    }else{
+    localstrage.setItem("Key", Number(document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[^0-9]/g, '')) + 1).toString())
+    localstrage.saveKey = Number(document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[^0-9]/g, '')) + 1).toString()
+    if(localstrage.getItem("Key") == "8"){
       document.getElementsByClassName("hero")[0].style.backgroundImage = document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[0-9]/g, "1");
+    }else{
+      document.getElementsByClassName("hero")[0].style.backgroundImage = document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[0-9]/g, localstrage.getItem("Key"));
     }
   }
 }
