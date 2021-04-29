@@ -29,16 +29,23 @@ export default {
     }
   },
   mounted () {
-    function getRandomBgImage() {
-      function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-      }
-      let index = getRandomInt(1, 7);
-      return "url(/images/jpg/" + index + ".jpg)";
-    };
-    document.getElementsByClassName("hero")[0].style.backgroundImage = getRandomBgImage()
+    // function getRandomBgImage() {
+    //   function getRandomInt(min, max) {
+    //     min = Math.ceil(min);
+    //     max = Math.floor(max);
+    //     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    //   }
+    //   let index = getRandomInt(1, 8);
+    //   return "url(/images/jpg/" + index + ".jpg)";
+    // };
+    // document.getElementsByClassName("hero")[0].style.backgroundImage = getRandomBgImage()
+    heroImagePath = document.getElementsByClassName("hero")[0].style.backgroundImage
+    nextImageNum = Number(heroImagePath.replace(/[^0-9]/g, '')) + 1
+    if(nextImageNum <= 7){
+      document.getElementsByClassName("hero")[0].style.backgroundImage = heroImagePath.replace(/[0-9]/g, nextImageNum.toString());
+    }else{
+      document.getElementsByClassName("hero")[0].style.backgroundImage = heroImagePath.replace(/[0-9]/g, "1");
+    }
   }
 }
 </script>
