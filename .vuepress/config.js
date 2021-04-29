@@ -120,7 +120,7 @@ module.exports = {
   // 出力ディレクトリ
   dest: "public",
   // 不明の設定
-  //shouldPrefetch: () => true,
+  shouldPrefetch: () => true,
   // キャッシュ(webpack高速化)
   //cache: true,
   // 監視ファイル(vuepress再構築,リアルタイム更新)
@@ -145,8 +145,7 @@ module.exports = {
     [
       "@vuepress/pwa",
       {
-        serviceWorker: true,
-        //updatePopup: true,
+        serviceWorker: false,
         updatePopup: {
           message: "コンテンツが新しく配信されています。",
           buttonText: "更新する",
