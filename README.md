@@ -1,8 +1,8 @@
 ---
 home: true
-bgImage: /images/freeImage/17.gif
+bgImage: /images/jpg/5.jpg
 heroText: VANILLA NOTE
-tagline: 
+tagline:
 ---
 
 <style>
@@ -30,7 +30,7 @@ export default {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
       }
-      let index = getRandomInt(1, 18);
+      let index = getRandomInt(1, 10);
       return "url(/images/jpg/" + index + ".jpg)";
     };
     document.getElementsByClassName("hero")[0].style.backgroundImage = getRandomBgImage()
