@@ -39,12 +39,18 @@ export default {
     //   return "url(/images/jpg/" + index + ".jpg)";
     // };
     // document.getElementsByClassName("hero")[0].style.backgroundImage = getRandomBgImage()
-    localstrage.setItem("Key", Number(document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[^0-9]/g, '')) + 1).toString())
-    localstrage.saveKey = Number(document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[^0-9]/g, '')) + 1).toString()
-    if(localstrage.getItem("Key") == "8"){
+    if(localStorage.getItem("heroImageNum") == null){
+      localStorage.setItem("heroImageNum", 1);
+      localStorage.saveKey = "heroImageNum";
+    }
+    localStorage.setItem("heroImageNum", (Number(localStorage.getItem("heroImageNum")) + 1));
+    localStorage.saveKey = "heroImageNum";
+    if(localStorage.getItem("heroImageNum") <= 7){
+      document.getElementsByClassName("hero")[0].style.backgroundImage = document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[0-9]/g, (localStorage.getItem("heroImageNum")).toString());
+      }else{
       document.getElementsByClassName("hero")[0].style.backgroundImage = document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[0-9]/g, "1");
-    }else{
-      document.getElementsByClassName("hero")[0].style.backgroundImage = document.getElementsByClassName("hero")[0].style.backgroundImage.replace(/[0-9]/g, localstrage.getItem("Key"));
+      localStorage.setItem("heroImageNum", 1);
+      localStorage.saveKey = "heroImageNum";
     }
   }
 }
