@@ -1,6 +1,3 @@
-# docs
+# 記事一覧(技術系)
 
-TODO:  
-ココにリンク一覧追加する  
-sidebar取得用関数修正  
-ホーム画像の整理
+<docsPostList rootDir="docs" />
