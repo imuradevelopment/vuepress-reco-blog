@@ -38,4 +38,7 @@ git log --date=format-local:'%Y/%m/%d %H:%M:%S'  --pretty=format:"  %C(magenta)�
 # 出力先が端末のときに色をつけて表示する
 git config --global color.ui auto   
 
+# ステータス
+git status --short --branch
+
 ```
